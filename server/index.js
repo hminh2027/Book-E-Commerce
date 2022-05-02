@@ -1,4 +1,5 @@
 const express = require('express')
+const exhbs = require('express-handlebars')
 const cors = require('cors')
 const routers = require('./routers/index')
 const path = require('path')
@@ -6,10 +7,14 @@ const app = express()
 
 // Middleware
 app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 
 // View engine
+app.engine('.hbs', exhbs.engine({ extname: '.hbs' }))
+app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
 
 // Routers
 routers(app)

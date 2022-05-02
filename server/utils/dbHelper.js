@@ -33,4 +33,16 @@ const getViewQuery = async (view) => {
     return result.recordsets
 }
 
-module.exports = { getViewQuery }
+const createRequest = async () => {
+    return new sql.Request()
+}
+
+const execProc = async (id) => {
+    const pool = connect()
+    const request = new sql.Request()
+    request.input('Category', sql.Int, id)
+    const result = await request.execute('SP_GETBOOKSBYCATEGORY')
+    return result.recordsets
+}
+
+module.exports = { getViewQuery, createRequest, execProc }
