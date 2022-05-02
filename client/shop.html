@@ -29,7 +29,7 @@
 	<!-- chosen.min.css-->
 	<link rel="stylesheet" href="css/chosen.min.css">
 	<!-- style css -->
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive css -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- modernizr css -->
@@ -1966,6 +1966,13 @@
 	<script src="js/plugins.js"></script>
 	<!-- main js -->
 	<script src="js/main.js"></script>
+	<script>
+		$.ajax({url: 'http://localhost:8000/api/book', async: false, success: (res) => {
+					const rs = res[0]
+					console.log(rs)			
+				}
+		})
+	</script>
 </body>
 
 

@@ -5009,7 +5009,7 @@ nav.menu .cr-dropdown ul {
 }
 
 .rating-summary>a {
-    color: #F07C29;
+    color: grey;
 }
 
 .reviews-actions a.view {
@@ -5058,7 +5058,7 @@ nav.menu .cr-dropdown ul {
     padding: 0 10px;
 }
 
-.product-add-form form a {
+.product-add-form form a , .outofstock {
     background: #333 none repeat scroll 0 0;
     border: 0 none;
     border-radius: 0;

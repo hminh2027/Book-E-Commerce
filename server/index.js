@@ -1,7 +1,11 @@
 const express = require('express')
-const app = express()
+const cors = require('cors')
 const routers = require('./routers/index')
 const path = require('path')
+const app = express()
+
+// Middleware
+app.use(cors())
 
 // View engine
 app.set('views', path.join(__dirname, 'views'))

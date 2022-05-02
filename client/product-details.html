@@ -28,7 +28,7 @@
 		<!-- chosen.min.css-->
         <link rel="stylesheet" href="css/chosen.min.css">
 		<!-- style css -->
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/style.css">
 		<!-- responsive css -->
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr css -->
@@ -464,7 +464,7 @@
 											<h1>Savvy Shoulder Tote</h1>
 										</div>
 										<div class="product-info-stock-sku">
-											<span>In stock</span>
+											<span class="stock-value">In stock</span>
 											<div class="product-attribute">
 												<span>SKU</span>
 												<span class="value">24-WB05</span>
@@ -486,13 +486,13 @@
 										<div class="product-info-price">
 											<div class="price-final">
 												<span>$34.00</span>
-												<span class="old-price">$40.00</span>
+												<span class="old-price"></span>
 											</div>
 										</div>
 										<div class="product-add-form">
 											<form action="#">
 												<div class="quality-button">
-													<input class="qty" type="number" value="1">
+													<input class="qty" type="number" value="1" min="0" max="999">
 												</div>
 												<a href="#">Add to cart</a>
 											</form>
@@ -1180,10 +1180,6 @@
         </div>
         <!-- Modal end -->
 		
-		
-		
-		
-		
 		<!-- all js here -->
 		<!-- jquery latest version -->
         <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -1213,7 +1209,33 @@
         <script src="js/plugins.js"></script>
 		<!-- main js -->
         <script src="js/main.js"></script>
-    </body>
 
-<!-- Mirrored from htmldemo.net/koparion/koparion/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Apr 2022 18:11:15 GMT -->
+		<script>
+			$.ajax({
+				url: 'http://localhost:8000/api/book', 
+				async: false, 
+				success: (res) => {
+					const rs = res[0][2]
+					console.log(rs)
+					$('.page-title h1').text(rs.title)
+					$('.product-attribute .value').text(rs.sku_code)
+					for (let i = 0; i< rs.rate; i++) {
+						$('.rating-summary a').eq(i).css('color', '#F07C29')
+					}
+					$('.reviews-actions a').eq(0).text(rs.reviews + ' Reviews')
+					$('.price-final span').eq(0).text(rs.old_price + 'đ')
+					$('.stock-value').text(rs.quantity + ' In Stock')
+					$('.qty').prop('max', rs.quantity)
+					if(rs.sale !== 0) {
+						$('.price-final span').eq(0).text(rs.price + 'đ')
+						$('.price-final .old-price').text(rs.old_price + 'đ')
+					}
+
+					$('.product-addto-links-text p').text(rs.short_description)
+					$('#Details .valu').text(rs.long_description)
+					rs.quantity === 0 && $('.product-add-form').html('<button class=\'outofstock\' type=\'button\' disabled >OUT OF STOCK</button>')
+				}
+			})
+		</script>
+    </body>
 </html>
