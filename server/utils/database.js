@@ -28,21 +28,21 @@ const connect = async () => {
 }
 
 const getViewQuery = async (view) => {
-    const pool = connect()
+    const pool = await connect()
     const result = await (await pool).query(`select * from ${view}`)
     return result.recordsets
 }
 
-const createRequest = async () => {
-    return new sql.Request()
-}
+// const createRequest = async () => {
+//     return new sql.Request()
+// }
 
-const execProc = async (id) => {
-    const pool = connect()
-    const request = new sql.Request()
-    request.input('Category', sql.Int, id)
-    const result = await request.execute('SP_GETBOOKSBYCATEGORY')
-    return result.recordsets
-}
+// const execProc = async (id) => {
+//     const pool = connect()
+//     const request = new sql.Request()
+//     request.input('Category', sql.Int, id)
+//     const result = await request.execute('SP_GETBOOKSBYCATEGORY')
+//     return result.recordsets
+// }
 
-module.exports = { getViewQuery, createRequest, execProc }
+module.exports = { getViewQuery, connect }

@@ -1,4 +1,4 @@
-const { getViewQuery } = require("../utils/dbHelper")
+const { getViewQuery } = require("../utils/database")
 
 module.exports.getAllCategories = async (req, res) => {
     const result = await getViewQuery('V_CATEGORIES');
