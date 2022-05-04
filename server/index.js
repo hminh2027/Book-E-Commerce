@@ -12,7 +12,14 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
 // View engine
-app.engine('.hbs', exhbs.engine({ extname: '.hbs' }))
+app.engine('.hbs', exhbs.engine({
+    extname: '.hbs',
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir  : [
+        path.join(__dirname, 'views/partials'),
+    ],
+    helpers: require('./configs/handlebarHelper')
+}))
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'))
 

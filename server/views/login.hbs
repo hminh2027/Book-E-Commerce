@@ -1,0 +1,79 @@
+<!-- breadcrumbs-area-start -->
+<div class="breadcrumbs-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs-menu">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#" class="active">login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumbs-area-end -->
+<!-- user-login-area-start -->
+<div class="user-login-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="login-title text-center mb-30">
+                    <h2>Login</h2>
+                </div>
+            </div>
+            <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
+                <div class="login-form">
+                    <div class="single-login">
+                        <label>Username<span>*</span></label>
+                        <input id="username" name="username" type="text" required />
+                    </div>
+                    <div class="single-login">
+                        <label>Passwords <span>*</span></label>
+                        <input id="password" name="password" type="password" required />
+                    </div>
+                    <div class="single-login single-login-2">
+                        <button onclick="submit()"  href="#">login</button>
+                        <input id="rememberme" type="checkbox" name="rememberme" value="forever">
+                        <span>Remember me</span>
+                    </div>
+                    <a href="#">Lost your password?</a>
+                    <br/>
+                    <a href="signup">Sign up now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- user-login-area-end -->
+<script src="/js/vendor/jquery-1.12.4.min.js"></script>
+<script>
+    function set_cookie(name, value) {
+        document.cookie = name +'='+ value +'; Path=/;';
+    }
+    function delete_cookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function submit() {
+        {{!-- e.preventDefault() --}}
+        var formData = {
+            username: $("#username").val(),
+            password: $("#password").val()
+        }
+
+        const result = $.ajax({
+            type: "POST",
+            url: "/account/login",
+            async: false,
+            data: formData,
+            success: (res) => {
+                delete_cookie('token')
+                set_cookie('token', res.token)
+                window.location.href = "/account/signup"
+		    }
+        })
+    }
+
+</script>

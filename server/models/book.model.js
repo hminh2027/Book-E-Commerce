@@ -6,6 +6,11 @@ class Book {
         
     }
 
+    static async getAll() {
+        const result = await getViewQuery('V_BOOKS')
+        return result
+    }
+
     static async insert() {
         const result = await getViewQuery('V_BOOKS')
         return result

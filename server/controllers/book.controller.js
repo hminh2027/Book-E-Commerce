@@ -1,9 +1,19 @@
 const Book = require("../models/book.model")
+const Category = require("../models/category.model")
 
 module.exports.getAllBooks = async (req, res) => {
-    // const book = new Book()
-    console.log(await Book.insert())
-    return res.render('home')
+    const categories = await Category.getAll()
+    const books = await Book.getAll()
+
+    return res.render('shop', {
+        categories: categories[0],
+        books: books[0]
+    })
+}
+
+module.exports.tryPost = async (req, res) => {
+    
+    return res.render('admin-home')
 }
 
 module.exports.getBookById = async (req, res) => {
@@ -18,6 +28,12 @@ module.exports.getBookById = async (req, res) => {
         book: result1.recordset[0],
         relatedBooks: result2.recordset
     })
+}
+
+module.exports.createBook = async (req, res) => {
+   
+    console.log(req.body)
+    return res.status(200).send('c')
 }
 
 module.exports.getBooksByCategory = async (req, res) => {

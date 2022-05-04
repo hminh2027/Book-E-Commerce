@@ -4528,7 +4528,6 @@ nav.menu .cr-dropdown ul {
 .toolbar-sorter {
     display: inline-block;
     float: right;
-    margin-right: 30px;
 }
 
 .control select {
@@ -5058,7 +5057,7 @@ nav.menu .cr-dropdown ul {
     padding: 0 10px;
 }
 
-.product-add-form form a {
+.product-add-form form a , .outofstock{
     background: #333 none repeat scroll 0 0;
     border: 0 none;
     border-radius: 0;
@@ -7614,3 +7613,20 @@ p.lost-password a:hover {
 }
 
 /*------ end Compare Page Wrapper -----*/
+/* Custom CSS */
+.review-form-wrapper {
+    position: relative;
+}
+
+.form-rating {
+    position: absolute;
+    right: 0;
+}
+
+#review {
+    width: 100%;
+}
+
+.staring {
+    color: rgb(240, 124, 41);
+}

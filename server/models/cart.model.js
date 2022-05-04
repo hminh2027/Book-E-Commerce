@@ -1,13 +1,16 @@
 const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
-class Category {
-    constructor(category_id, title, price_in, price_out, sale, quantity, sku_code, short_description, long_description) {
+class Cart {
+    constructor() {
         
     }
 
-    static async getAll() {
-        const result = await getViewQuery('V_CATEGORIES')
+    static async getAll(id) {
+        const pool = await connect()
+        const result = await pool.request()
+        .input('id', sql.Int, id)
+        .execute('SP_GETCARTBYID')
         return result
     }
 
@@ -27,4 +30,4 @@ class Category {
     }
 }
 
-module.exports = Category
+module.exports = Cart
