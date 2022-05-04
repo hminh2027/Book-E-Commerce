@@ -26,8 +26,12 @@ class User {
         return result
     }
 
-    static async getAll() {
-        const result = await getViewQuery('V_CATEGORIES')
+    static async getUserAddress(id) {
+        const pool = await connect()
+        const result = await pool.request()
+        .input('id', sql.Int, id)
+        .query('select * from V_ADDRESSES where user_id = @id')
+        
         return result
     }
 

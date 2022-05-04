@@ -1,13 +1,13 @@
 const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
-class Shipping {
+class Country {
     constructor() {
         
     }
 
     static async getAll() {
-        const result = await getViewQuery('V_SHIPPINGS')
+        const result = await getViewQuery('V_COUNTRIES')
         return result
     }
 
@@ -27,4 +27,4 @@ class Shipping {
     }
 }
 
-module.exports = Shipping
+module.exports = Country

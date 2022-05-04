@@ -1,6 +1,21 @@
 const User = require("../models/user.model")
+const Country = require("../models/country.model")
 const jwt = require('jsonwebtoken')
+const Order = require("../models/order.model")
 require('dotenv').config()
+
+module.exports.getMyAccount = async (req, res) => {
+    const result = await User.getUserAddress(req.user.id)
+    const result2 = await Country.getAll()
+    const result3 = await Order.getByUserId(req.user.id)
+
+    return res.render('my-account', {
+        user: req.user,
+        address: result.recordset[0],
+        countries: result2[0],
+        orders: result3.recordset
+    })
+}
 
 module.exports.getLogin = async (req, res) => {
     
