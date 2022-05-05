@@ -30,7 +30,7 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>First Name<span>*</span></label>
-                                    <input type="text" />
+                                    <input id='first_name' type="text" name="first_name" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>Last Name<span>*</span></label>
-                                    <input type="text" />
+                                    <input id='last_name' type="text" name="last_name" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
@@ -46,7 +46,13 @@
                     <div class="single-register">
                         <form action="#">
                             <label>Company Name</label>
-                            <input type="text" />
+                            <input id='company_name' type="text" name="company_name" spellcheck="false" />
+                        </form>
+                    </div>
+                    <div class="single-register">
+                        <form action="#">
+                            <label>Username</label>
+                            <input id='username' type="text" name="username" spellcheck="false" required/>
                         </form>
                     </div>
                     <div class="row">
@@ -54,7 +60,7 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>Email Address<span>*</span></label>
-                                    <input type="text" />
+                                    <input id='email' type="email" name="email" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
@@ -62,32 +68,30 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>Phone<span>*</span></label>
-                                    <input type="text" />
+                                    <input id='phone' type="tel" name="phone" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="single-register">
                         <label>Country<span>*</span></label>
-                        <select class="chosen-select" tabindex="1" style="width:100%;"
-                            data-placeholder="Default Sorting">
-                            <option value="country">Select a country</option>
-                            <option value="Islands">Aland Islands</option>
-                            <option value="Afghanistan">Afghanistan</option>
-                            <option value="Albania">Albania</option>
-                            <option value="Samoa">American Samoa</option>
+                        <select id='country' class="chosen-select" tabindex="1" style="width:100%;"
+                            data-placeholder="Default Sorting" name="country" required>
+                            {{#each countries}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                            {{/each}}
                         </select>
                     </div>
                     <div class="single-register">
                         <form action="#">
                             <label>Address<span>*</span></label>
-                            <input type="text" placeholder="Street address" />
+                            <input id='address' type="text" placeholder="Street address" name="address" spellcheck="false" required/>
                         </form>
                     </div>
                     <div class="single-register">
                         <form action="#">
                             <label>Town/City<span>*</span></label>
-                            <input type="text" />
+                            <input id='city' type="text" name="city" spellcheck="false" required/>
                         </form>
                     </div>
                     <div class="row">
@@ -95,7 +99,7 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>State<span>*</span></label>
-                                    <input type="text"  />
+                                    <input id='state' type="text"  name="state" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
@@ -103,7 +107,7 @@
                             <div class="single-register">
                                 <form action="#">
                                     <label>Postcode/zip<span>*</span></label>
-                                    <input type="text" placeholder="Postcode/zip" />
+                                    <input id='postcode' type="text" placeholder="Postcode/zip" name="postcode" spellcheck="false" required/>
                                 </form>
                             </div>
                         </div>
@@ -111,17 +115,17 @@
                     <div class="single-register">
                         <form action="#">
                             <label>Account password<span>*</span></label>
-                            <input type="text" placeholder="Password" />
+                            <input id='password' type="password" placeholder="Password" name="password"  required/>
                         </form>
                     </div>
                     <div class="single-register">
                         <form action="#">
                             <label>Confirm password<span>*</span></label>
-                            <input type="text" placeholder="Password" />
+                            <input id='cfpassword' type="password" placeholder="Password" name="cf_password"  required />
                         </form>
                     </div>
                     <div class="single-register">
-                        <a href="#">Register</a>
+                        <a onclick="submit()" href="#">Register</a>
                     </div>
                     <a href="login">Already have an account? Login</a>
                 </div>
@@ -130,3 +134,33 @@
     </div>
 </div>
 <!-- user-login-area-end -->
+<script>
+    const submit = () => {
+        const formData = {
+            username: $("#username").val(),
+            password: $("#password").val(),
+            firstName: $("#first_name").val(), 
+            lastName: $("#first_name").val(), 
+            email: $("#email").val(), 
+            companyName: $("#company_name").val(), 
+            country: $("#country").val(),
+            phone: $("#phone").val(), 
+            address: $("#address").val(), 
+            city: $("#city").val(), 
+            state: $("#state").val(), 
+            postcode: $("#postcode").val()
+        }
+        
+        console.log(formData)
+
+        const result = $.ajax({
+            type: "POST",
+            url: "/account/signup",
+            async: false,
+            data: formData,
+            success: (res) => {
+                console.log(res)
+		    }
+        })
+    }
+</script>

@@ -3,30 +3,29 @@ const sql = require('mssql')
 
 class Order {
     static async getAll() {
-        const result = await getViewQuery('V_BOOKS')
-        return result
-    }
+        try {
+            const result = await getViewQuery('V_BOOKS')
+            return {status: 200, data: result[0]}
 
-    static async insert() {
-        const result = await getViewQuery('V_BOOKS')
-        return result
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
     }
 
     static async getByUserId(id) {
-        const pool = await connect()
-        const result = await pool.request()
-        .input('id', sql.Int, id)
-        .query('select * from V_ORDERS where user_id = @id')
-        
-        return result
-    }
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .query('select * from V_ORDERS where user_id = @id')
+            
+            return {status: 200, data: result}
 
-    update() {
-
-    }
-
-    delete() {
-
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
     }
 }
 

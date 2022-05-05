@@ -4,18 +4,25 @@ const Country = require("../models/country.model")
 
 module.exports.getCart = async (req, res) => {
     const { id } = req.user
-    const result = await Cart.getAll(id)
-    return res.render('cart', {books: result.recordset})
+    const rs = await Cart.getByUserId(id)
+    return res.render('cart', {books: rs.data})
 }
 
 module.exports.getCheckout = async (req, res) => {
     const { id } = req.user
-    const result = await Cart.getAll(id)
-    const result2 = await Shipping.getAll()
-    const result3 = await Country.getAll()
+    const rs = await Cart.getByUserId(id)
+    const rs2 = await Shipping.getAll()
+    const rs3 = await Country.getAll()
+
     return res.render('checkout', {
-        books: result.recordset,
-        shippings: result2[0],
-        countries: result3[0]
+        books: rs.data,
+        shippings: rs2.data,
+        countries: rs3.data
     })
+}
+
+module.exports.getCartJSON = async (req, res) => {
+    const { id } = req.user
+    const rs = await Cart.getByUserId(id)
+    return res.json(rs.data)
 }

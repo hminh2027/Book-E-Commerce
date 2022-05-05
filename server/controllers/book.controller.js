@@ -2,43 +2,41 @@ const Book = require("../models/book.model")
 const Category = require("../models/category.model")
 
 module.exports.getAllBooks = async (req, res) => {
-    const categories = await Category.getAll()
-    const books = await Book.getAll()
+    let rs2
+    const { categoryID } = req.query
+    
+    if (categoryID) rs2 = await Book.getByCategoryId(categoryID)
+    else rs2 = await Book.getAll()
+
+    const rs1 = await Category.getAll()
 
     return res.render('shop', {
-        categories: categories[0],
-        books: books[0]
+        categories: rs1.data,
+        books: rs2.data
     })
-}
-
-module.exports.tryPost = async (req, res) => {
-    
-    return res.render('admin-home')
 }
 
 module.exports.getBookById = async (req, res) => {
     const {id} = req.params
 
-    const result1 = await Book.getById(id)
-    const result2 = await Book.getByCategories(result1.recordset[0].category_id)
-
-    console.log(result2)
+    const rs1 = await Book.getById(id)
+    const rs2 = await Book.getByCategoryId(rs1.data.category_id)
 
     return res.render('product-details', {
-        book: result1.recordset[0],
-        relatedBooks: result2.recordset
+        book: rs1.data,
+        relatedBooks: rs2.data
     })
 }
 
 module.exports.createBook = async (req, res) => {
-   
-    console.log(req.body)
+
     return res.status(200).send('c')
 }
 
-module.exports.getBooksByCategory = async (req, res) => {
-    console.log(req.params.category)
-    // console.log(await execProc(req.params.category))
+module.exports.getBooksByCategoryId = async (req, res) => {
+    const {id} = req.params
 
-    return res.status(200).send('c')
+    const rs = await Book.getByCategoryId(id)
+
+    return res.render('shop')
 }

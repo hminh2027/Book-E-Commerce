@@ -2,32 +2,32 @@ const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
 class Cart {
-    constructor() {
+    static async getByUserId(id) {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .execute('SP_GETCARTBYID')
+            return result.recordset
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
         
     }
 
-    static async getAll(id) {
-        const pool = await connect()
-        const result = await pool.request()
-        .input('id', sql.Int, id)
-        .execute('SP_GETCARTBYID')
-        return result
-    }
-
     static async insert() {
-        const result = await getViewQuery('V_BOOKS')
-        return result
+        try {
+            const result = await getViewQuery('V_BOOKS')
+            return {status: 200, data: result[0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }    
     }
 
-    
-
-    update() {
-
-    }
-
-    delete() {
-
-    }
 }
 
 module.exports = Cart

@@ -39,36 +39,11 @@
                     <div class="my-cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
-                                <span>2</span>
+                                <span class="cart-size"></span>
                                 <div class="mini-cart-sub">
-                                    <div class="cart-product">
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="/img/product/1.jpg" alt="book" /></a>
-                                            </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Joust Duffle Bag</a></h5>
-                                                <p>1 x £60.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="/img/product/3.jpg" alt="book" /></a>
-                                            </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
-                                                <p>1 x £52.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="cart-product"></div>
                                     <div class="cart-totals">
-                                        <h5>Total <span>£12.00</span></h5>
+                                        <h5>Total <span></span></h5>
                                     </div>
                                     <div class="cart-bottom">
                                         <a class="view-cart" href="cart.html">view cart</a>
@@ -183,3 +158,20 @@
     </div>
     <!-- mobile-menu-area-end -->
 </header>
+<script>
+    let total = 0
+
+    $.ajax({
+        url: 'http://localhost:8000/cart/data', 
+        async: true, 
+        success: (res) => {
+            res.map(book => {
+                total += book.subtotal
+                const html = `<div class="single-cart"><div class="cart-img"><a href="#"><img src="/img/product/1.jpg" alt="book" /></a></div><div class="cart-info"><h5><a href="#">${book.title}</a></h5><p>${book.quantity} x ${book.price} đ</p></div><div class="cart-icon"><a href="#"><i class="fa fa-remove"></i></a></div></div>`
+                $('.cart-product').append(html)
+            })
+            $('.cart-size').text(res.length)
+            $('.cart-totals span').text(total + ' đ')
+        }
+    })
+</script>

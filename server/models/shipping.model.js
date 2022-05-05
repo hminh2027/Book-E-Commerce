@@ -2,28 +2,16 @@ const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
 class Shipping {
-    constructor() {
-        
-    }
 
     static async getAll() {
-        const result = await getViewQuery('V_SHIPPINGS')
-        return result
-    }
+        try {
+            const result = await getViewQuery('V_SHIPPINGS')
+            return {status: 200, data: result[0]}
 
-    static async insert() {
-        const result = await getViewQuery('V_BOOKS')
-        return result
-    }
-
-    
-
-    update() {
-
-    }
-
-    delete() {
-
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }  
     }
 }
 
