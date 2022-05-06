@@ -2,7 +2,7 @@ const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
 class Country {
-    static async getAll() {
+    static getAll = async () => {
         try {
             const result = await getViewQuery('V_COUNTRIES')
             return {status: 200, data: result[0]}

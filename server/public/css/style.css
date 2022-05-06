@@ -121,6 +121,7 @@ h6 {
 a {
     transition: all 0.3s ease 0s;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
@@ -7194,11 +7195,11 @@ p.lost-password a:hover {
     color: #fff;
 }
 
-#productModal {
+.productModal {
     padding-right: 0 !important;
 }
 
-#productModal .modal-dialog {
+.productModal .modal-dialog {
     margin: 8% auto;
     max-width: 960px;
 }

@@ -1,302 +1,310 @@
 <!-- breadcrumbs-area-start -->
-		<div class="breadcrumbs-area mb-70">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="breadcrumbs-menu">
-							<ul>
-								<li><a href="#">Home</a></li>
-								<li><a href="#" class="active">Book Details</a></li>
-							</ul>
-						</div>
-					</div>
+<div class="breadcrumbs-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumbs-menu">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#" class="active">Book Details</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
-		<!-- breadcrumbs-area-end -->
-		<!-- product-main-area-start -->
-		<div class="product-main-area mb-70">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-9 col-md-12 col-12 order-lg-1 order-1">
-						<!-- product-main-area-start -->
-						<div class="product-main-area">
-							<div class="row">
-								<div class="col-lg-5 col-md-6 col-12">
-									<div class="flexslider">
-                                        <div class="product-flag">
-                                            <ul>
-                                                {{#if book.is_new}}
-                                                    <li><span class="sale">new</span></li>
-                                                {{/if}}
-                                                {{#if book.sale}}
-                                                    <li><span class="discount-percentage">-{{book.sale}}%</span></li>
-                                                {{/if}}
-                                            </ul>
-                                        </div>
-										<ul class="slides">
-											<li data-thumb="/img/thum-2/1.jpg">
-											  <img src="/img/flex/1.jpg" alt="woman" />
-											</li>
-											<li data-thumb="/img/thum-2/4.jpg">
-											  <img src="/img/flex/5.jpg" alt="woman" />
-											</li>
-											<li data-thumb="/img/thum-2/2.jpg">
-											  <img src="/img/flex/2.jpg" alt="woman" />
-											</li>
-											<li data-thumb="/img/thum-2/5.jpg">
-											  <img src="/img/flex/5.jpg" alt="woman" />
-											</li>
-										</ul>
-									</div>
+	</div>
+</div>
+<!-- breadcrumbs-area-end -->
+<!-- product-main-area-start -->
+<div class="product-main-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-12 col-12 order-lg-1 order-1">
+				<!-- product-main-area-start -->
+				<div class="product-main-area">
+					<div class="row">
+						<div class="col-lg-5 col-md-6 col-12">
+							<div class="flexslider">
+								<div class="product-flag">
+									<ul>
+										{{#if book.is_new}}
+										<li><span class="sale">new</span></li>
+										{{/if}}
+										{{#if book.sale}}
+										<li><span class="discount-percentage">-{{book.sale}}%</span></li>
+										{{/if}}
+									</ul>
 								</div>
-								<div class="col-lg-7 col-md-6 col-12">
-									<div class="product-info-main">
-										<div class="page-title">
-											<h1>{{book.title}}</h1>
-										</div>
-										<div class="product-info-stock-sku">
-											<span class="stock-value">{{book.quantity}} In stock</span>
-											<div class="product-attribute">
-												<span>SKU</span>
-												<span class="value">{{book.sku_code}}</span>
-											</div>
-										</div>
-										<div class="product-reviews-summary">
-											<div class="rating-summary">
-												{{#times book.rate}}	
-													<a href="#"><i class="fa fa-star staring"></i></a>
-												{{/times}}												                                 											
-											</div>
-											<div class="reviews-actions">
-												<div href="#">{{book.reviews}} Reviews</div>
-											</div>
-										</div>
-										<div class="product-info-price">
-											<div class="price-final">
-												<span>{{book.price}} đ</span>
-                                                {{#if book.sale}}
-                                                    <span class="old-price">{{book.old_price}} đ</span>
-                                                {{/if}}
-											</div>
-										</div>
-										<div class="product-add-form">
-                                            {{#if book.quantity}}
-                                                <form action="#">
-                                                    <div class="quality-button">
-                                                        <input class="qty" type="number" value="1" min="0" max="{{book.quantity}}">
-                                                    </div>
-                                                    <a href="#">Add to cart</a>
-                                                </form>
-                                            {{else}}
-                                                <button class='outofstock' type='button' disabled >OUT OF STOCK</button>
-                                            {{/if}}
-											
-										</div>
-										<div class="product-social-links">
-											<div class="product-addto-links-text">
-												<p>{{book.short_description}}</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>	
-						</div>
-						<!-- product-main-area-end -->
-						<!-- product-info-area-start -->
-						<div class="product-info-area mt-80">
-							<!-- Nav tabs -->
-							<ul class="nav">
-								<li><a class="active" href="#Details" data-toggle="tab">Details</a></li>
-								<li><a href="#Reviews" data-toggle="tab">Reviews ({{book.reviews}})</a></li>
-							</ul>
-							<div class="tab-content">
-                                <div class="tab-pane fade show active" id="Details">
-                                    <div class="valu">
-                                      <p>{{book.long_description}}</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="Reviews">
-                                    <div class="valu valu-2">
-                                        <div class="section-title mb-60 mt-60">
-                                            <h2>Customer Reviews</h2>
-                                        </div>
-                                        <ul>
-                                            <li>
-                                                <div class="review-title">
-                                                    <h3>themes</h3>
-                                                </div>
-                                                <div class="review-left">
-                                                    <div class="review-rating">
-                                                        <span>Price</span>
-                                                        <div class="rating-result">
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-rating">
-                                                        <span>Value</span>
-                                                        <div class="rating-result">
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-rating">
-                                                        <span>Quality</span>
-                                                        <div class="rating-result">
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="review-right">
-                                                    <div class="review-content">
-                                                        <h4>themes </h4>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p class="review-author">Review by<a href="#">plaza</a></p>
-                                                        <p class="review-date">Posted on <span>12/9/16</span></p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        {{!-- Build ur form --}}
-                                        <div class="review-form-wrapper">
-                                            <span class="section-title mb-60 mt-60 review-title"><h2>Add a review</h2></span>
-                                            <form action="" class="review-form">
-                                                <div class="form-rating">
-                                                    {{!-- absolute this --}}
-                                                    <div class="rating-summary">
-                                                        <a href="#" style="color: rgb(240, 124, 41);"><i class="fa fa-star"></i></a>
-                                                        <a href="#" style="color: rgb(240, 124, 41);"><i class="fa fa-star"></i></a>
-                                                        <a href="#" style="color: rgb(240, 124, 41);"><i class="fa fa-star"></i></a>
-                                                        <a href="#"><i class="fa fa-star"></i></a>
-                                                        <a href="#"><i class="fa fa-star"></i></a>
-                                                    </div>
-                                                </div>
-                                                <p class="form-body">
-                                                    <textarea id="review" name="review" cols="45" rows="8" required="" placeholder="Your Review"></textarea>
-                                                </p>
-                                                <p class="form-submit">
-                                                    <input name="submit" type="submit" id="submit" class="submit outofstock" value="Submit">
-                                                </p>
-                                            </form>
-                                        </div>
-                                        {{!-- end custom form --}}
-                                    </div>
-                                </div>
-                            </div>	
-						</div>
-						<!-- product-info-area-end -->
-						<!-- new-book-area-start -->
-						<div class="new-book-area mt-60">
-							<div class="section-title text-center mb-30">
-								<h3>Related Products</h3>
+								<ul class="slides">
+									<li data-thumb="{{book.image}}">
+										<img src="{{book.image}}" alt="woman" />
+									</li>
+									<li data-thumb="{{book.image}}">
+										<img src="{{book.image}}" alt="woman" />
+									</li>
+									<li data-thumb="{{book.image}}">
+										<img src="{{book.image}}" alt="woman" />
+									</li>
+									<li data-thumb="{{book.image}}">
+										<img src="{{book.image}}" alt="woman" />
+									</li>
+								</ul>
 							</div>
-							<div class="tab-active-2 owl-carousel">
-								<!-- single-product-start -->
-                                {{#each relatedBooks}}
-								<div class="product-wrapper">
-									<div class="product-img">
-										<a href="#">
-											<img src="/img/product/1.jpg" alt="book" class="primary" />
-										</a>
-										<div class="quick-view">
-                                            <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                                <i class="fa fa-search-plus"></i>
-                                            </a>
-                                        </div>
-                                        <div class="product-flag">
-                                            <ul>
-                                                {{#if this.is_new}}
-                                                    <li><span class="sale">new</span></li>
-                                                {{/if}}
-                                                {{#if this.sale}}
-                                                    <li><span class="discount-percentage">-{{this.sale}}%</span></li>
-                                                {{/if}}  
-                                            </ul>
-                                        </div>
+						</div>
+						<div class="col-lg-7 col-md-6 col-12">
+							<div class="product-info-main">
+								<div class="page-title">
+									<h1>{{book.title}}</h1>
+								</div>
+								<div class="product-info-stock-sku">
+									<span class="stock-value">{{book.quantity}} In stock</span>
+									<div class="product-attribute">
+										<span>SKU</span>
+										<span class="value">{{book.sku_code}}</span>
 									</div>
-									<div class="product-details text-center">
-										{{#times this.rate}}	
-											<i class="fa fa-star staring"></i>
+								</div>
+								<div class="product-reviews-summary">
+									<div class="rating-summary">
+										{{#times book.rate}}
+										<a href="#"><i class="fa fa-star staring"></i></a>
+										{{/times}}
+									</div>
+									<div class="reviews-actions">
+										<div href="#">{{book.reviews}} Reviews</div>
+									</div>
+								</div>
+								<div class="product-info-price">
+									<div class="price-final">
+										<span>{{book.price}} đ</span>
+										{{#if book.sale}}
+										<span class="old-price">{{book.old_price}} đ</span>
+										{{/if}}
+									</div>
+								</div>
+								<div class="product-add-form">
+									{{#if book.quantity}}
+									<form action="#">
+										<div class="quality-button">
+											<input class="qty" type="number" value="1" min="0" max="{{book.quantity}}">
+										</div>
+										<a onclick="addToCart({{this.id}})">Add to cart</a>
+									</form>
+									{{else}}
+									<button class='outofstock' type='button' disabled>OUT OF STOCK</button>
+									{{/if}}
+
+								</div>
+								<div class="product-social-links">
+									<div class="product-addto-links-text">
+										<p>{{book.short_description}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- product-main-area-end -->
+				<!-- product-info-area-start -->
+				<div class="product-info-area mt-80">
+					<!-- Nav tabs -->
+					<ul class="nav">
+						<li><a class="active" href="#Details" data-toggle="tab">Details</a></li>
+						<li><a href="#Reviews" data-toggle="tab">Reviews ({{book.reviews}})</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade show active" id="Details">
+							<div class="valu">
+								<p>{{book.long_description}}</p>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="Reviews">
+							<div class="valu valu-2">
+								<div class="section-title mb-60 mt-60">
+									<h2>Customer Reviews</h2>
+								</div>
+								<ul>
+									<li>
+										<div class="review-title">
+											<h3>themes</h3>
+										</div>
+										<div class="review-left">
+											<div class="review-rating">
+												<span>Price</span>
+												<div class="rating-result">
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+												</div>
+											</div>
+											<div class="review-rating">
+												<span>Value</span>
+												<div class="rating-result">
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+												</div>
+											</div>
+											<div class="review-rating">
+												<span>Quality</span>
+												<div class="rating-result">
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+													<a href="#"><i class="fa fa-star"></i></a>
+												</div>
+											</div>
+										</div>
+										<div class="review-right">
+											<div class="review-content">
+												<h4>themes </h4>
+											</div>
+											<div class="review-details">
+												<p class="review-author">Review by<a href="#">plaza</a></p>
+												<p class="review-date">Posted on <span>12/9/16</span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+								{{!-- Build ur form --}}
+								<div class="review-form-wrapper">
+									<span class="section-title mb-60 mt-60 review-title">
+										<h2>Add a review</h2>
+									</span>
+									<form action="" class="review-form">
+										<div class="form-rating">
+											{{!-- absolute this --}}
+											<div class="rating-summary">
+												<a href="#" style="color: rgb(240, 124, 41);"><i
+														class="fa fa-star"></i></a>
+												<a href="#" style="color: rgb(240, 124, 41);"><i
+														class="fa fa-star"></i></a>
+												<a href="#" style="color: rgb(240, 124, 41);"><i
+														class="fa fa-star"></i></a>
+												<a href="#"><i class="fa fa-star"></i></a>
+												<a href="#"><i class="fa fa-star"></i></a>
+											</div>
+										</div>
+										<p class="form-body">
+											<textarea id="review" name="review" cols="45" rows="8" required=""
+												placeholder="Your Review"></textarea>
+										</p>
+										<p class="form-submit">
+											<input name="submit" type="submit" id="submit" class="submit outofstock"
+												value="Submit">
+										</p>
+									</form>
+								</div>
+								{{!-- end custom form --}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- product-info-area-end -->
+				<!-- new-book-area-start -->
+				<div class="new-book-area mt-60">
+					<div class="section-title text-center mb-30">
+						<h3>Related Products</h3>
+					</div>
+					<div class="tab-active-2 owl-carousel">
+						<!-- single-product-start -->
+						{{#each relatedBooks}}
+						<div class="product-wrapper">
+							<div class="product-img">
+								<a href="#">
+									<img src="{{this.image}}" alt="book" class="primary" />
+								</a>
+								<div class="quick-view">
+									<a class="action-view" href="#" data-target="#productModal" data-toggle="modal"
+										title="Quick View">
+										<i class="fa fa-search-plus"></i>
+									</a>
+								</div>
+								<div class="product-flag">
+									<ul>
+										{{#if this.is_new}}
+										<li><span class="sale">new</span></li>
+										{{/if}}
+										{{#if this.sale}}
+										<li><span class="discount-percentage">-{{this.sale}}%</span></li>
+										{{/if}}
+									</ul>
+								</div>
+							</div>
+							<div class="product-details text-center">
+								{{#times this.rate}}
+								<i class="fa fa-star staring"></i>
+								{{/times}}
+								<h4><a href="#">{{this.title}}</a></h4>
+								<div class="product-price">
+									<ul>
+										<li>{{this.price}} đ</li>
+										{{#if this.sale}}
+										<li class="old-price">{{this.old_price}} đ</li>
+										{{/if}}
+									</ul>
+								</div>
+							</div>
+							<div class="product-link">
+								<div class="product-button">
+									<a onclick="addToCart({{this.id}})" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+								<div class="add-to-link">
+									<ul>
+										<li><a href="/book/{{this.id}}" title="Details"><i class="fa fa-external-link"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						{{/each}}
+						<!-- single-product-end -->
+					</div>
+				</div>
+				<!-- new-book-area-start -->
+			</div>
+			<div class="col-lg-3 col-md-12 col-12 order-lg-2 order-2">
+				<div class="shop-left">
+					<div class="left-title mb-20">
+						<h4>Related Products</h4>
+					</div>
+					<div class="random-area mb-30">
+						<div class="product-active-2 owl-carousel">
+							<div class="product-total-2">
+								{{#each relatedBooks}}
+								<div class="single-most-product bd mb-18">
+									<div class="most-product-img">
+										<a href="#"><img src="{{this.image}}" alt="book" /></a>
+									</div>
+									<div class="most-product-content">
+										{{#times this.rate}}
+										<a href="#"><i class="fa fa-star staring"></i></a>
 										{{/times}}
 										<h4><a href="#">{{this.title}}</a></h4>
 										<div class="product-price">
 											<ul>
 												<li>{{this.price}} đ</li>
-                                                {{#if this.sale}}
-                                                <li class="old-price">{{this.old_price}} đ</li>
-                                                {{/if}}
+												{{#if this.sale}}
+												<li class="old-price">{{this.old_price}} đ</li>
+												{{/if}}
 											</ul>
 										</div>
 									</div>
-									<div class="product-link">
-										<div class="product-button">
-											<a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-										<div class="add-to-link">
-                                            <ul>
-                                                <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                            </ul>
-                                        </div>
-									</div>	
 								</div>
-                                {{/each}}
-								<!-- single-product-end -->
+								{{/each}}
 							</div>
 						</div>
-						<!-- new-book-area-start -->
 					</div>
-					<div class="col-lg-3 col-md-12 col-12 order-lg-2 order-2">
-						<div class="shop-left">
-							<div class="left-title mb-20">
-								<h4>Related Products</h4>
-							</div>
-							<div class="random-area mb-30">
-								<div class="product-active-2 owl-carousel">
-									<div class="product-total-2">          
-                                        {{#each relatedBooks}}
-										<div class="single-most-product bd mb-18">
-											<div class="most-product-img">
-												<a href="#"><img src="/img/product/20.jpg" alt="book" /></a>
-											</div>
-											<div class="most-product-content">
-												{{#times this.rate}}	
-													<a href="#"><i class="fa fa-star staring"></i></a>
-												{{/times}}												                                 											
-												<h4><a href="#">{{this.title}}</a></h4>
-												<div class="product-price">
-													<ul>
-														<li>{{this.price}} đ</li>
-                                                        {{#if this.sale}}
-                                                        <li class="old-price">{{this.old_price}} đ</li>
-                                                        {{/if}}
-													</ul>
-												</div>
-											</div>
-										</div>
-                                        {{/each}}
-									</div>
-								</div>
-							</div>
-							<div class="banner-area mb-30">
-								<div class="banner-img-2">
-									<a href="#"><img src="/img/banner/33.jpg" alt="banner" /></a>
-								</div>
-							</div>
+					<div class="banner-area mb-30">
+						<div class="banner-img-2">
+							<a href="#"><img src="/img/banner/33.jpg" alt="banner" /></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- product-main-area-end -->
+	</div>
+</div>
+<!-- product-main-area-end -->

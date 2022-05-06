@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="login-title text-center mb-30">
-                    <h2>Login</h2>
+                    <h2>Admin Login</h2>
                 </div>
             </div>
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12">
@@ -36,9 +36,6 @@
                     <div class="single-login single-login-2">
                         <a onclick="submit()"  href="#">login</a>
                     </div>
-                    <a href="#">Lost your password?</a>
-                    <br/>
-                    <a href="signup">Sign up now</a>
                 </div>
             </div>
         </div>
@@ -46,6 +43,13 @@
 </div>
 <!-- user-login-area-end -->
 <script>
+    function set_cookie(name, value) {
+        document.cookie = name +'='+ value +'; Path=/;';
+    }
+    function delete_cookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
     function submit() {
         const formData = {
             username: $("#username").val(),
@@ -54,19 +58,20 @@
 
         if (!username || !password) return window.alert('Please fill all the required blank')
 
-        $.ajax({
+        const result = $.ajax({
             type: "POST",
-            url: "/account/login",
+            url: "/admin/login",
             async: false,
             data: formData,
             success: (res) => {
                 delete_cookie('token')
                 set_cookie('token', res.token)
-                window.location.href = "/account"
+                window.location.href = "/admin/login"
 		    },
             error: (err) => {
                 return alert(err.responseJSON.msg)
             }
         })
     }
+
 </script>

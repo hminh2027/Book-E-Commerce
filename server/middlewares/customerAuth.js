@@ -5,15 +5,15 @@ require('dotenv').config()
 module.exports = async (req, res, next) => {
     const token = getCookie('token', req.headers.cookie)
 
-    if(!token) return res.status(401).json({msg:'Access denied. No token provided'})
+    if(!token) return res.redirect('account/login')
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_KEY)
         req.user = decoded
+        if(req.user.role !== 'customer') console.log('you r not customer')
         next()
     } catch (err) {
         console.log(err)
-        return res.status(403).json({msg:'Invalid token! Please refresh page or relogin'})
+        return res.redirect('account/login')
     }
 }
-

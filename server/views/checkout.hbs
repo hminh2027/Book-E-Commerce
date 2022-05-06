@@ -34,42 +34,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="coupon-accordion">
-                    <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
-                    <div class="coupon-content" id="checkout-login">
-                        <div class="coupon-info">
-                            <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est
-                                sit amet ipsum luctus.</p>
-                            <form action="#">
-                                <p class="form-row-first">
-                                    <label>Username or email <span class="required">*</span></label>
-                                    <input type="text">
-                                </p>
-                                <p class="form-row-last">
-                                    <label>Password <span class="required">*</span></label>
-                                    <input type="text">
-                                </p>
-                                <p class="form-row">
-                                    <input type="submit" value="Login">
-                                    <label>
-                                        <input type="checkbox">
-                                        Remember me
-                                    </label>
-                                </p>
-                                <p class="lost-password">
-                                    <a href="#">Lost your password?</a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
                     <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
                     <div class="coupon-checkout-content" id="checkout_coupon">
                         <div class="coupon-info">
-                            <form action="#">
+                            <div action="#">
                                 <p class="checkout-coupon">
                                     <input type="text" placeholder="Coupon code">
                                     <input type="submit" value="Apply Coupon">
                                 </p>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,55 +75,55 @@
                                     <div class="col-lg-6 col-md-6 col-12 ">
                                         <div class="checkout-form-list">
                                             <label>First Name <span class="required">*</span></label>
-                                            <input type="text" placeholder="">
+                                            <input type="text" value="{{user.first_name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="checkout-form-list">
                                             <label>Last Name <span class="required">*</span></label>
-                                            <input type="text" placeholder="">
+                                            <input type="text" value="{{user.last_name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="checkout-form-list">
                                             <label>Company Name</label>
-                                            <input type="text" placeholder="">
+                                            <input type="text" value="{{user.company_name}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="checkout-form-list">
                                             <label>Address <span class="required">*</span></label>
-                                            <input type="text" placeholder="Street address">
+                                            <input type="text" value="{{user.address}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="checkout-form-list">
                                             <label>Town / City <span class="required">*</span></label>
-                                            <input type="text" placeholder="Town / City">
+                                            <input type="text" value="{{user.city}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="checkout-form-list">
                                             <label>State / County <span class="required">*</span></label>
-                                            <input type="text" placeholder="">
+                                            <input type="text" value="{{user.state}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="checkout-form-list">
                                             <label>Postcode / Zip <span class="required">*</span></label>
-                                            <input type="text" placeholder="Postcode / Zip">
+                                            <input type="text" value="{{user.postcode}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="checkout-form-list">
                                             <label>Email Address <span class="required">*</span></label>
-                                            <input type="email" placeholder="">
+                                            <input type="email" value="{{user.email}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="checkout-form-list">
                                             <label>Phone <span class="required">*</span></label>
-                                            <input type="text" placeholder="Postcode / Zip">
+                                            <input type="text" value="{{user.phone}}" disabled>
                                         </div>
                                     </div>                                    
                                     <div class="col-lg-12 col-md-12 col-12">
@@ -161,19 +134,6 @@
                                                     placeholder="Notes about your order, e.g. special notes for delivery."
                                                     rows="10" cols="30" id="checkout-mess"></textarea>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-12">
-                                        <div class="checkout-form-list create-acc">
-                                            <input type="checkbox" id="cbox">
-                                            <label>Create an account?</label>
-                                        </div>
-                                        <div class="checkout-form-list create-account" id="cbox_info"
-                                            style="display: none;">
-                                            <p>Create an account by entering the information below. If you are a
-                                                returning customer please login at the top of the page.</p>
-                                            <label>Account password <span class="required">*</span></label>
-                                            <input type="password" placeholder="password">
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +173,7 @@
                                                     <ul>
                                                         {{#each shippings}}
                                                         <li>
-                                                            <input id="shipping{{this.id}}" value="{{this.id}}" name="shipping" type="radio">
+                                                            <input onclick="setTotal({{this.price}})" id="shipping{{this.id}}" value="{{this.id}}" name="shipping" type="radio">
                                                             <label for="shipping{{this.id}}">
                                                                 {{this.name}}: <span class="amount">{{this.price}} đ</span>
                                                             </label>
@@ -225,7 +185,7 @@
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Order Total</th>
-                                                <td><strong><span class="amount">£215.00</span></strong>
+                                                <td><strong><span class="amount"></span></strong>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -246,5 +206,12 @@
 </div>
 <!-- checkout-area-end -->
 <script>
-
+    const books ={{{json books}}}
+    let total = 0
+    books.map(e => total += e.subtotal)
+    $('.cart-subtotal .amount').text(total)
+    $('.order-total .amount').text(total)
+    const setTotal = (shipping) => {
+        $('.order-total .amount').text(($('.cart-subtotal .amount').text() - -shipping) + ' đ')
+    }
 </script>

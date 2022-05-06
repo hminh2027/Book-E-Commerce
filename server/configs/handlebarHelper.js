@@ -6,37 +6,14 @@ module.exports = {
         return accum;
     },
 
-    compare: function(lvalue, rvalue, options) {
-
-		if (arguments.length < 3)
-        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
-
-        var operator = options.hash.operator || "==";
-
-        var operators = {
-            '==':       function(l,r) { return Number(l) == Number(r); },
-            '===':      function(l,r) { return l === r; },
-            '!=':       function(l,r) { return l != r; },
-            '<':        function(l,r) { return l < r; },
-            '>':        function(l,r) { return Number(l) > Number(r);; },
-            '<=':       function(l,r) { return l <= r; },
-            '>=':       function(l,r) { return l >= r; },
-            'typeof':   function(l,r) { return typeof l == r; }
+    compare: function(v1, v2, options) {
+        if(v1 == v2) {
+          return options.fn(this);
         }
+        return options.inverse(this);
+      },
 
-        if (!operators[operator])
-            throw new Error("Handlerbars Helper 'compare' doesn't know the operator "+operator);
-
-        var result = operators[operator](lvalue,rvalue);
-
-        if( result ) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }		
-	},
-
-    setVar: function(varName, varValue, options) {
-        options.data.root[varName] = varValue;
+    json: function(context) {
+        return JSON.stringify(context);
     }
 }

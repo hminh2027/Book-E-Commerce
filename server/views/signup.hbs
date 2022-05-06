@@ -51,7 +51,7 @@
                     </div>
                     <div class="single-register">
                         <form action="#">
-                            <label>Username</label>
+                            <label>Username<span>*</span></label>
                             <input id='username' type="text" name="username" spellcheck="false" required/>
                         </form>
                     </div>
@@ -125,7 +125,7 @@
                         </form>
                     </div>
                     <div class="single-register">
-                        <a onclick="submit()" href="#">Register</a>
+                        <a onclick="submit()" >Register</a>
                     </div>
                     <a href="login">Already have an account? Login</a>
                 </div>
@@ -136,31 +136,37 @@
 <!-- user-login-area-end -->
 <script>
     const submit = () => {
-        const formData = {
-            username: $("#username").val(),
-            password: $("#password").val(),
-            firstName: $("#first_name").val(), 
-            lastName: $("#first_name").val(), 
-            email: $("#email").val(), 
-            companyName: $("#company_name").val(), 
-            country: $("#country").val(),
-            phone: $("#phone").val(), 
-            address: $("#address").val(), 
-            city: $("#city").val(), 
-            state: $("#state").val(), 
-            postcode: $("#postcode").val()
-        }
-        
-        console.log(formData)
+        const username = $("#username").val().trim(),
+            password = $("#password").val().trim(),
+            cfpassword = $("#cfpassword").val().trim(),
+            firstName = $("#first_name").val().trim(), 
+            lastName = $("#first_name").val().trim(), 
+            email = $("#email").val().trim(), 
+            companyName = $("#company_name").val().trim(), 
+            country = $("#country").val().trim(),
+            phone = $("#phone").val().trim(), 
+            address = $("#address").val().trim(), 
+            city = $("#city").val().trim(), 
+            state = $("#state").val().trim(), 
+            postcode = $("#postcode").val().trim()
 
-        const result = $.ajax({
+        const formData = { username, password, cfpassword, firstName, lastName, email, companyName, country, phone, address, city, state, postcode }
+             
+            console.log(formData)
+        if (!username || !password || !cfpassword || !firstName || !lastName || !email || !country || !phone || !address || !city || !state || !postcode) return window.alert('Please fill all the required blank')
+        if (password !== cfpassword) return window.alert('Password not match!')
+
+        $.ajax({
             type: "POST",
             url: "/account/signup",
             async: false,
             data: formData,
             success: (res) => {
                 console.log(res)
-		    }
+		    },
+            error: (err) => {          
+                return alert(err.responseJSON.msg)
+            }
         })
     }
 </script>

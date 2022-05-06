@@ -9,10 +9,12 @@ module.exports.getAllBooks = async (req, res) => {
     else rs2 = await Book.getAll()
 
     const rs1 = await Category.getAll()
+    const rs3 = await Book.getFeaturedBooks()
 
     return res.render('shop', {
         categories: rs1.data,
-        books: rs2.data
+        books: rs2.data,
+        featuredBooks: rs3.data
     })
 }
 

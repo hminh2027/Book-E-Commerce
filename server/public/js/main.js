@@ -520,6 +520,27 @@
         sidemenuDropdown();
     }
 
+    // CUSTOM JS
+    // const addToCart = (id) => {
+	// 	const formData = {
+    //         bookId: id,
+    //         quantity: $(`#productModal${id} .quantity_value`)
+    //     }
 
+	// 	$.ajax({
+    //         type: "POST",
+    //         url: "/cart/cartDetail",
+    //         async: false,
+    //         data: formData,
+    //         success: (res) => {
+    //             console.log(res)
+	// 	    },
+    //         error: (err) => {
+    //             return alert(err.responseJSON.msg)
+    //         }
+    //     })
+	// }
+
+    
 
 })(jQuery);
