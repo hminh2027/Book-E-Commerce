@@ -39,10 +39,30 @@ module.exports.insertCartDetail = async (req, res) => {
     return res.status(200).json({ msg: rs.data })
 }
 
+module.exports.updateCartDetail = async (req, res) => {
+    const cartId = req.user.cart_id
+    const bookId = req.params.id
+    const { quantity } = req.body
+    const rs = await Cart.updateCartDetail(cartId, bookId, quantity)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
+}
+
 module.exports.deleteCartDetail = async (req, res) => {
     const cartId = req.user.cart_id
     const bookId = req.params.id
     const rs = await Cart.deleteCartDetail(cartId, bookId)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
+}
+
+module.exports.deleteCart = async (req, res) => {
+    const cartId = req.user.cart_id
+    const rs = await Cart.deleteCart(cartId)
 
     if (rs.status === 500) return res.status(500).json({ msg: rs.data })
 

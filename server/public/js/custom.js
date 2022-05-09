@@ -1,7 +1,7 @@
-const addToCart = (id, quantity) => {
+const addToCart = (id) => {
     const formData = {
         bookId: id,
-        quantity: quantity || 1
+        quantity: $('.qty').val() || 1
     }
 
     $.ajax({
@@ -34,10 +34,34 @@ const getCartDetails = () => {
             })
             $('.cart-size').text(res.length)
             $('.cart-totals span').text(total + ' đ')
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
         }
     })
 }
 
+const updateCartDetails = () => {
+    $('.quantity-value').each((idx, e) => {
+        const quantity = $(e).val()
+        const id = $(e).attr('data-id')
+        const data = { quantity }
+
+        $.ajax({
+            type: "PUT",
+            url: `http://localhost:8000/cart/cartDetail/${id}`, 
+            data,
+            async: true, 
+            success: (res) => {
+                console.log(res)
+            },
+            error: (err) => {
+                return alert(err.responseJSON.msg)
+            }
+        })
+    })
+    location.reload()
+}
 
 const deleteCartDetail = (id) => {
     $.ajax({
@@ -46,6 +70,81 @@ const deleteCartDetail = (id) => {
         async: false,
         success: (res) => {
             getCartDetails()
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const deleteCart = () => {
+    $.ajax({
+        type: "DELETE",
+        url: `http://localhost:8000/cart`,
+        async: false,
+        success: (res) => {
+            console.log(res)
+            window.location.reload()
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const getCoupon = () => {
+    const code = $('#coupon').val()
+
+    $.ajax({
+        url: `http://localhost:8000/coupon/${code}`,
+        async: false,
+        success: (res) => {
+            console.log(res)
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const insertOrderDetail = (bookId, quantity, price) => {
+    const data = { bookId, quantity, price }
+    
+    $.ajax({
+        type: "POST",
+        url: `http://localhost:8000/order/orderDetail`, 
+        data,
+        async: true, 
+        success: (res) => {
+            console.log(res)
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const insertOrder = () => {
+    const data = {
+        shippingId: $('.shipping:checked').val(),
+        countryId: $('#country').val(),
+        coupon: $('#coupon').val(),
+        note: $('#checkout-mess').val()
+    }
+
+    $.ajax({
+        type: "POST",
+        url: `http://localhost:8000/order`,
+        async: false,
+        data,
+        success: (res) => {
+            $('.cart_item').each((idx, e) => {
+                const bookId = $(e).find('.product-name').attr('data-id')
+                const quantity = $(e).find('.product-quantity').text()
+                const price = $(e).find('.amount').text()
+        
+                insertOrderDetail(bookId, quantity, price)
+            })
         },
         error: (err) => {
             return alert(err.responseJSON.msg)
@@ -63,5 +162,5 @@ const delete_cookie = (name) => {
 
 const logout = () => {
     delete_cookie('token')
-    window.location.href = "/account/login"    
+    window.location.href = '/account/login'    
 }

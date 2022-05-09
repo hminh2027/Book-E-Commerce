@@ -86,10 +86,24 @@ class Book {
         } catch(err) {
             console.log(err)
             return {status: 500, data: err}
-        }
-        
+        }    
     }
 
+    // INSERT
+    static insertBook = async () => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .query('select * from V_BOOKS where category_id = @id')
+            
+            return {status: 200, data: result.recordset}
+
+        } catch(err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }   
+    }
 }
 
 module.exports = Book

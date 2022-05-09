@@ -39,8 +39,8 @@
                         <div class="coupon-info">
                             <div action="#">
                                 <p class="checkout-coupon">
-                                    <input type="text" placeholder="Coupon code">
-                                    <input type="submit" value="Apply Coupon">
+                                    <input id="coupon" type="text" placeholder="Coupon code">
+                                    <input onclick="getCoupon()" value="Apply Coupon">
                                 </p>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <div class=" col-lg-12">
                                         <div class="country-select">
                                             <label>Country <span class="required">*</span></label>
-                                            <select>
+                                            <select id="country">
                                                 {{#each countries}}
                                                 <option value="{{this.id}}">{{this.name}}</option>
                                                 {{/each}}
@@ -153,11 +153,11 @@
                                         <tbody>
                                             {{#each books}}
                                             <tr class="cart_item">
-                                                <td class="product-name">
-                                                    {{this.title}} <strong class="product-quantity"> × {{this.quantity}}</strong>
+                                                <td data-id="{{this.id}}" class="product-name">
+                                                    {{this.title}} x <strong class="product-quantity">{{this.quantity}}</strong>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="amount">{{this.subtotal}} đ</span>
+                                                    <span class="amount">{{this.subtotal}}</span> đ
                                                 </td>
                                             </tr>
                                             {{/each}}
@@ -165,7 +165,7 @@
                                         <tfoot>
                                             <tr class="cart-subtotal">
                                                 <th>Cart Subtotal</th>
-                                                <td><span class="amount">????</span></td>
+                                                <td><span class="amount"></span></td>
                                             </tr>
                                             <tr class="shipping">
                                                 <th>Shipping</th>
@@ -173,9 +173,9 @@
                                                     <ul>
                                                         {{#each shippings}}
                                                         <li>
-                                                            <input onclick="setTotal({{this.price}})" id="shipping{{this.id}}" value="{{this.id}}" name="shipping" type="radio">
+                                                            <input class="shipping" onclick="setTotal({{this.price}})" id="shipping{{this.id}}" value="{{this.id}}" name="shipping" type="radio">
                                                             <label for="shipping{{this.id}}">
-                                                                {{this.name}}: <span class="amount">{{this.price}} đ</span>
+                                                                {{this.name}}: <span class="amount">{{this.price}}</span> đ
                                                             </label>
                                                         </li>
                                                         {{/each}}
@@ -190,7 +190,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="order-button-payment">
-                                                    <input type="submit" value="Place order">
+                                                    <input style="text-align: center;" onclick="createOrder()"  value="Place order">
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -214,4 +214,10 @@
     const setTotal = (shipping) => {
         $('.order-total .amount').text(($('.cart-subtotal .amount').text() - -shipping) + ' đ')
     }
+
+    const createOrder = () => {
+        insertOrder()
+        deleteCart()
+        window.location.href = "/"
+}
 </script>

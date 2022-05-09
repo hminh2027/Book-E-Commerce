@@ -18,12 +18,12 @@
 <div class="shop-main-area mb-70">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-12 col-12 order-lg-1 order-2 mt-sm-50 mt-xs-40">
+			<div class="order-2 col-lg-3 col-md-12 col-12 order-lg-1 mt-sm-50 mt-xs-40">
 				<div class="shop-left">
 					<div class="section-title-5 mb-30">
 						<h2>Shopping Options</h2>
 					</div>
-					<div class="left-title mb-20">
+					<div class="mb-20 left-title">
 						<h4>Category</h4>
 					</div>
 					<div class="left-menu mb-30">
@@ -33,7 +33,7 @@
 							{{/each}}
 						</ul>
 					</div>
-					<div class="left-title mb-20">
+					<div class="mb-20 left-title">
 						<h4>Top 5</h4>
 					</div>
 					<div class="random-area mb-30">
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+			<div class="order-1 col-lg-9 col-md-12 col-12 order-lg-2">
 				<div class="category-image mb-30">
 					<a href="#"><img src="img/banner/32.jpg" alt="banner" /></a>
 				</div>
@@ -109,7 +109,7 @@
 							{{#each books}}
 							<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
 								<!-- single-product-start -->
-								<div class="product-wrapper mb-40">
+								<div class="mb-40 product-wrapper">
 									<div class="product-img">
 										<a href="/book/{{this.id}}">
 											<img src="{{this.image}}" alt="book" class="primary" />
@@ -131,7 +131,7 @@
 											</ul>
 										</div>
 									</div>
-									<div class="product-details text-center">
+									<div class="text-center product-details">
 										<div class="product-rating">
 											<ul>
 												{{#times this.rate}}
@@ -218,16 +218,11 @@
 				<!-- tab-area-end -->
 				<!-- pagination-area-start -->
 				<div class="pagination-area mt-50">
-					<div class="list-page-2">
-						<p>Items 1-9 of 11</p>
-					</div>
 					<div class="page-number">
 						<ul>
-							<li><a href="#" class="active">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#" class="angle"><i class="fa fa-angle-right"></i></a></li>
+							{{#times pageCount}}
+							<li><a href="/book?page={{this}}">{{this}}</a></li>
+							{{/times}}
 						</ul>
 					</div>
 				</div>

@@ -26,6 +26,10 @@ app.set('views', path.join(__dirname, 'views'))
 // Routers
 routers(app)
 
+app.use((req, res, next) => {
+    res.status(404).render('404')
+})
+
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {

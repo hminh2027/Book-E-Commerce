@@ -45,7 +45,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title section-title-res text-center mb-30">
+                    <div class="text-center section-title section-title-res mb-30">
                         <h2>Featured</h2>
                     </div>
                 </div>
@@ -59,27 +59,22 @@
                             <a href="/book/{{this.id}}">
                                 <img src="{{this.image}}" alt="book" class="primary" />
                             </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
                             <div class="product-flag">
                                 <ul>
                                     {{#if this.is_new}}
-                                        <li><span class="sale">new</span></li>
+                                    <li><span class="sale">new</span></li>
                                     {{/if}}
                                     {{#if this.sale}}
-                                        <li><span class="discount-percentage">-{{this.sale}}%</span></li>
+                                    <li><span class="discount-percentage">-{{this.sale}}%</span></li>
                                     {{/if}}
                                 </ul>
                             </div>
                         </div>
-                        <div class="product-details text-center">
+                        <div class="text-center product-details">
                             <div class="product-rating">
                                 <ul>
-                                    {{#times this.rate}}	
-                                        <i class="fa fa-star staring"></i>
+                                    {{#times this.rate}}
+                                    <i class="fa fa-star staring"></i>
                                     {{/times}}
                                 </ul>
                             </div>
@@ -95,11 +90,12 @@
                         </div>
                         <div class="product-link">
                             <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a onclick="addToCart({{this.id}})" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="/book/{{this.id}}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="/book/{{this.id}}" title="Details"><i
+                                                class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -155,14 +151,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title bt text-center pt-100 mb-50">
+                    <div class="text-center section-title bt pt-100 mb-50">
                         <h2>Our Products</h2>
-                        <p>Browse the collection of our best selling and top interresting products. <br /> ll definitely find what you are looking for.</p>
+                        <p>Browse the collection of our best selling and top interresting products. <br /> ll definitely
+                            find what you are looking for.</p>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <!-- tab-menu-start -->
-                    <div class="tab-menu mb-40 text-center">
+                    <div class="mb-40 text-center tab-menu">
                         <ul class="nav justify-content-center">
                             <li><a class="active" href="#Audiobooks" data-toggle="tab">New Arrival</a></li>
                             <li><a href="#books" data-toggle="tab">OnSale</a></li>
@@ -183,28 +180,23 @@
                                 <a href="/book/{{this.id}}">
                                     <img src="{{this.image}}" alt="book" class="primary" />
                                 </a>
-                                <div class="quick-view">
-                                    <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                        <i class="fa fa-search-plus"></i>
-                                    </a>
-                                </div>
                                 <div class="product-flag">
                                     <ul>
                                         {{#if this.is_new}}
-                                            <li><span class="sale">new</span></li>
+                                        <li><span class="sale">new</span></li>
                                         {{/if}}
                                         {{#if this.sale}}
-                                            <li><span class="discount-percentage">-{{this.sale}}%</span></li>
-                                        {{/if}} 
+                                        <li><span class="discount-percentage">-{{this.sale}}%</span></li>
+                                        {{/if}}
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-details text-center">
+                            <div class="text-center product-details">
                                 <div class="product-rating">
                                     <ul>
-                                        {{#times this.rate}}	
-											<i class="fa fa-star staring"></i>
-										{{/times}}
+                                        {{#times this.rate}}
+                                        <i class="fa fa-star staring"></i>
+                                        {{/times}}
                                     </ul>
                                 </div>
                                 <h4><a href="/book/{{this.id}}">{{this.title}}</a></h4>
@@ -219,7 +211,7 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a onclick="addToCart({{this.id}})" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
@@ -242,27 +234,28 @@
                                     <img src="{{this.image}}" alt="book" class="primary" />
                                 </a>
                                 <div class="quick-view">
-                                    <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                    <a class="action-view" href="#" data-target="#productModal" data-toggle="modal"
+                                        title="Quick View">
                                         <i class="fa fa-search-plus"></i>
                                     </a>
                                 </div>
                                 <div class="product-flag">
                                     <ul>
                                         {{#if this.is_new}}
-                                            <li><span class="sale">new</span></li>
+                                        <li><span class="sale">new</span></li>
                                         {{/if}}
                                         {{#if this.sale}}
-                                            <li><span class="discount-percentage">-{{this.sale}}%</span></li>
-                                        {{/if}} 
+                                        <li><span class="discount-percentage">-{{this.sale}}%</span></li>
+                                        {{/if}}
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-details text-center">
+                            <div class="text-center product-details">
                                 <div class="product-rating">
                                     <ul>
-                                        {{#times this.rate}}	
-											<i class="fa fa-star staring"></i>
-										{{/times}}
+                                        {{#times this.rate}}
+                                        <i class="fa fa-star staring"></i>
+                                        {{/times}}
                                     </ul>
                                 </div>
                                 <h4><a href="/book/{{this.id}}">{{this.title}}</a></h4>
@@ -277,11 +270,12 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a onclick="addToCart({{this.id}})" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
-                                        <li><a href="/book/{{this.id}}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                        <li><a href="/book/{{this.id}}" title="Details"><i
+                                                    class="fa fa-external-link"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -299,28 +293,23 @@
                                 <a href="/book/{{this.id}}">
                                     <img src="{{this.image}}" alt="book" class="primary" />
                                 </a>
-                                <div class="quick-view">
-                                    <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                        <i class="fa fa-search-plus"></i>
-                                    </a>
-                                </div>
                                 <div class="product-flag">
                                     <ul>
                                         {{#if this.is_new}}
-                                            <li><span class="sale">new</span></li>
+                                        <li><span class="sale">new</span></li>
                                         {{/if}}
                                         {{#if this.sale}}
-                                            <li><span class="discount-percentage">-{{this.sale}}%</span></li>
-                                        {{/if}} 
+                                        <li><span class="discount-percentage">-{{this.sale}}%</span></li>
+                                        {{/if}}
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-details text-center">
+                            <div class="text-center product-details">
                                 <div class="product-rating">
                                     <ul>
-                                        {{#times this.rate}}	
-											<i class="fa fa-star staring"></i>
-										{{/times}}
+                                        {{#times this.rate}}
+                                        <i class="fa fa-star staring"></i>
+                                        {{/times}}
                                     </ul>
                                 </div>
                                 <h4><a href="/book/{{this.id}}">{{this.title}}</a></h4>
@@ -335,7 +324,7 @@
                             </div>
                             <div class="product-link">
                                 <div class="product-button">
-                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a onclick="addToCart({{this.id}})" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="add-to-link">
                                     <ul>
@@ -358,11 +347,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title section-title-res pt-100 bt-3 text-center mb-30">
+                    <div class="text-center section-title section-title-res pt-100 bt-3 mb-30">
                         <h2>Latest from our blog</h2>
                     </div>
                 </div>
-                <div class="post-active owl-carousel text-center">
+                <div class="text-center post-active owl-carousel">
                     <div class="col-lg-12">
                         <div class="single-post">
                             <div class="post-img">
@@ -375,7 +364,8 @@
                             <div class="post-content">
                                 <h3><a href="#">The History and the Hype</a></h3>
                                 <span class="meta-author"> Demo koparion </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
+                                <p>Discover five of our favourite dresses from our new collection that are destined to
+                                    be worn and loved immediately.</p>
                             </div>
                         </div>
                     </div>
@@ -391,7 +381,8 @@
                             <div class="post-content">
                                 <h3><a href="#">Answers to your Questions</a></h3>
                                 <span class="meta-author"> Demo koparion </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
+                                <p>Discover five of our favourite dresses from our new collection that are destined to
+                                    be worn and loved immediately.</p>
                             </div>
                         </div>
                     </div>
@@ -407,7 +398,8 @@
                             <div class="post-content">
                                 <h3><a href="#">What is Bootstrap?</a></h3>
                                 <span class="meta-author"> Demo koparion </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
+                                <p>Discover five of our favourite dresses from our new collection that are destined to
+                                    be worn and loved immediately.</p>
                             </div>
                         </div>
                     </div>
@@ -423,7 +415,8 @@
                             <div class="post-content">
                                 <h3><a href="#">Etiam eros massa</a></h3>
                                 <span class="meta-author"> Demo koparion </span>
-                                <p>Discover five of our favourite dresses from our new collection that are destined to be worn and loved immediately.</p>
+                                <p>Discover five of our favourite dresses from our new collection that are destined to
+                                    be worn and loved immediately.</p>
                             </div>
                         </div>
                     </div>
@@ -498,7 +491,8 @@
                         </div>
                         <div class="twitter-text">
                             <p>
-                                Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum notare quam
+                                Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+                                Mirum notare quam
                             </p>
                             <a href="#">koparion</a>
                         </div>

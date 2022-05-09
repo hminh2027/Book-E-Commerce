@@ -5,7 +5,7 @@ require('dotenv').config()
 module.exports = async (req, res, next) => {
     const token = getCookie('token', req.headers.cookie)
 
-    if(!token) return res.redirect('account/login')
+    if(!token) return res.redirect('http://localhost:8000/account/login')
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_KEY)
@@ -14,6 +14,6 @@ module.exports = async (req, res, next) => {
         next()
     } catch (err) {
         console.log(err)
-        return res.redirect('account/login')
+        return res.redirect('http://localhost:8000/account/login')
     }
 }

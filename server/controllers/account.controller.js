@@ -25,7 +25,7 @@ module.exports.getMyAccount = async (req, res) => {
 module.exports.getLogin = async (req, res) => {
     const token = getCookie('token', req.headers.cookie)
 
-    if (token) return res.redirect(req.baseUrl)
+    if (token) return res.redirect('/account')
     return res.render('login')
 }
 
@@ -44,7 +44,7 @@ module.exports.postLogin = async (req, res) => {
     if (rs.status === 500) return res.status(500).json({msg: rs.data})
     
     const accessToken = jwt.sign(rs.data, process.env.ACCESS_TOKEN_KEY, {
-        expiresIn: '1d'
+        expiresIn: '30d'
     })
 
     return res.status(200).json({

@@ -73,7 +73,7 @@
                                     <div class="tab-pane fade" id="orders" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Orders</h5>
-                                            <div class="myaccount-table table-responsive text-center">
+                                            <div class="text-center myaccount-table table-responsive">
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
@@ -91,8 +91,7 @@
                                                             <td>{{this.date}}</td>
                                                             <td>{{this.status}}</td>
                                                             <td>{{this.total}} đ</td>
-                                                            <td><a href="#" class="btn btn-sqr">View</a>
-                                                            </td>
+                                                            <td><a href="/order/orderDetail/{{this.id}}" class="btn btn-sqr">View</a></td>
                                                         </tr>
                                                         {{/each}}
                                                     </tbody>

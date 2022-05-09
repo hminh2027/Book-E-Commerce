@@ -13,6 +13,36 @@ class Order {
         }
     }
 
+    static getById = async (id) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .query('select * from V_ORDERS where id = @id')
+            
+            return {status: 200, data: result.recordset[0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static getDetailById = async (id) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .query('select * from V_ORDER_DETAILS where order_id = @id')
+            
+            return {status: 200, data: result.recordset}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
     static getByUserId = async (id) => {
         try {
             const pool = await connect()
@@ -21,6 +51,44 @@ class Order {
             .query('select * from V_ORDERS where userID = @id')
             
             return {status: 200, data: result.recordset}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static insertOrder = async (shippingId, countryId, couponId, userId, note) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('shipping_id', sql.Int, shippingId)
+            .input('country_id', sql.Int, countryId)
+            .input('coupon_id', sql.Int, couponId)
+            .input('user_id', sql.Int, userId)
+            .input('note', sql.NVarChar, note)
+            .execute('SP_INSERT_ORDER')
+
+            if(result.rowsAffected[0] === 0) return {status: 500, data: 'Inserted Fail!'}
+            return {status: 200, data: 'Inserted Successful!'}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static insertOrderDetail = async (bookId, quantity, price) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('book_id', sql.Int, bookId)
+            .input('quantity', sql.Int, quantity)
+            .input('price', sql.Money, price)
+            .execute('SP_INSERT_ORDER_DETAIL')
+
+            if(result.rowsAffected[0] === 0) return {status: 500, data: 'Inserted Fail!'}
+            return {status: 200, data: 'Inserted Successful!'}
 
         } catch (err) {
             console.log(err)
