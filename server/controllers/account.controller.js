@@ -30,6 +30,10 @@ module.exports.getLogin = async (req, res) => {
 }
 
 module.exports.getSignup = async (req, res) => {
+    const token = getCookie('token', req.headers.cookie)
+
+    if (token) return res.redirect('/account')
+    
     const rs = await Country.getAll()
     return res.render('signup', {countries: rs.data})
 }

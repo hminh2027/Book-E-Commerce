@@ -2,21 +2,71 @@ const User = require("../models/user.model")
 
 const jwt = require('jsonwebtoken')
 
-const { validateEmail } = require("../utils/validate")
 const { getCookie } = require('../utils/cookie')
+const Category = require("../models/category.model")
+const Book = require("../models/book.model")
 
 require('dotenv').config()
 
 module.exports.getAdminPage = async (req, res) => {
     
-    return res.render('admin-home')
+    return res.render('admin/book-detail', {layout: 'admin'})
 }
 
 module.exports.getLogin = async (req, res) => {
-    const token = getCookie('token', req.headers.cookie)
+    // const token = getCookie('token', req.headers.cookie)
 
-    if (token) return res.redirect(req.baseUrl)
-    return res.render('admin-login')
+    // if (token) return res.redirect(req.baseUrl)
+    return res.render('admin/login')
+}
+
+module.exports.getBooks = async (req, res) => {
+    let rs2
+    const minPrice = req.query.minPrice || 0
+    const maxPrice = req.query.maxPrice || 999999
+    const { categoryID } = req.query
+
+   categoryID ? rs2 = await Book.getByCategoryId(categoryID) : rs2 = await Book.getAll()
+
+    const rs1 = await Category.getAll()
+
+    // Filter by price range
+    let books = rs2.data.filter(book => book.price > minPrice && book.price < maxPrice)
+
+    // Pagination
+    const page = req.query.page || 1
+    const limit = 8
+    const pageCount = Math.ceil(rs2.data.length / limit)
+    books = books.slice(page * limit - limit, page * limit)
+
+    return res.render('admin/book', {
+        layout: 'admin',
+        categories: rs1.data,
+        books,
+        pageCount
+    })
+}
+
+module.exports.getBookById = async (req, res) => {
+    const {id} = req.params
+
+    const rs = await Category.getAll()
+    const rs1 = await Book.getById(id)
+
+    return res.render('admin/book-detail', {
+        layout: 'admin',
+        categories: rs.data,
+        book: rs1.data,
+    })
+}
+
+module.exports.getBookCreate = async (req, res) => {
+    const rs = await Category.getAll()
+
+    return res.render('admin/book-detail', {
+        layout: 'admin',
+        categories: rs.data
+    })
 }
 
 module.exports.postLogin = async (req, res) => {

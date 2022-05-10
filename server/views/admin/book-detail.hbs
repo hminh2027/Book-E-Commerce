@@ -1,0 +1,155 @@
+<!-- start: page -->
+    <form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+        <div class="row mt-2">
+            <div class="col">
+                <section class="card card-modern card-big-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-2-5 col-xl-1-5">
+                                <i class="card-big-info-icon bx bx-box"></i>
+                                <h2 class="card-big-info-title">General Info</h2>
+                                <p class="card-big-info-desc">Add here the product description with all details and necessary information.</p>
+                            </div>
+                            <div class="col-lg-3-5 col-xl-4-5">
+                                <div class="form-group row align-items-center pb-3">
+                                    <input id="book-id" type="hidden" name="id" value={{book.id}}>
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Book Title</label>
+                                    <div class="col-lg-7 col-xl-6">
+                                        <input id="title" type="text" class="form-control form-control-modern" name="title" value="{{book.title}}" required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end pt-2 mt-1 mb-0">Short Description</label>
+                                    <div class="col-lg-7 col-xl-6">
+                                        <textarea id="short-desc" class="form-control form-control-modern" name="shortDescription" rows="3">{{book.short_description}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-5 col-xl-3 control-label text-lg-end pt-2 mt-1 mb-0">Long Description</label>
+                                    <div class="col-lg-7 col-xl-6">
+                                        <textarea id="long-desc" class="form-control form-control-modern" name="longDescription" rows="6">{{book.long_description}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <section class="card card-modern card-big-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-2-5 col-xl-1-5">
+                                <i class="card-big-info-icon bx bx-camera"></i>
+                                <h2 class="card-big-info-title">Product Image</h2>
+                                <p class="card-big-info-desc">Upload your Product image. You can add multiple images</p>
+                            </div>
+                            <div class="col-lg-3-5 col-xl-4-5">
+                                <div class="form-group row align-items-center">
+                                    <div class="col">
+                                        <div id="dropzone-form-image" class="dropzone-modern dz-square">
+                                            <input type="file" id="img" name="img" accept="image/*" value="{{book.image}}">
+                                            <span class="dropzone-upload-message text-center">
+                                                <i class="bx bxs-cloud-upload"></i>
+                                                <b class="text-color-primary">Drag/Upload</b> your images here.                                             
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <section class="card card-modern card-big-info">
+                    <div class="card-body">
+                        <div class="tabs-modern row" style="min-height: 490px;">
+                            <div class="col-lg-2-5 col-xl-1-5">
+                                <div class="nav flex-column tabs" id="tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="price-tab" data-bs-toggle="pill" data-bs-target="#price" role="tab" aria-controls="price" aria-selected="true">Price</a>
+                                    <a class="nav-link" id="inventory-tab" data-bs-toggle="pill" data-bs-target="#inventory" role="tab" aria-controls="inventory" aria-selected="false">Inventory</a>
+                                    <a class="nav-link" id="category-tab" data-bs-toggle="pill" data-bs-target="#category" role="tab" aria-controls="category" aria-selected="false">Category</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3-5 col-xl-4-5">
+                                <div class="tab-content" id="tabContent">
+                                    <div class="tab-pane fade show active" id="price" role="tabpanel" aria-labelledby="price-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Price In(vnd)</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input id="price-in" type="number" class="form-control form-control-modern" name="regularPrice" value="{{book.price_in}}" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Price Out (vnd)</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input id="price-out" type="number" class="form-control form-control-modern" name="regularPrice" value="{{book.price}}" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Sale Price (%)</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input id="sale" type="number" class="form-control form-control-modern" name="salePrice" value="{{book.sale}}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">SKU</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input id="sku" type="text" class="form-control form-control-modern" name="sku" value="{{book.sku_code}}" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Quantity</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <input id="qty" type="number" class="form-control form-control-modern" name="qty" value="{{book.quantity}}" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
+                                        <div class="form-group row align-items-center pb-3">
+                                            <label class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Book Category</label>
+                                            <div class="col-lg-7 col-xl-6">
+                                                <select id="category" class="form-control form-control-modern" name="category">
+                                                    {{#each categories}}
+                                                    <option value="{{this.id}}">{{this.name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row action-buttons">
+            <div class="col-12 col-md-auto">
+                <button onclick="insertBook()" class=" btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1" data-loading-text="Loading...">
+                    <i class="bx bx-save text-4 me-2"></i> Create Book
+                </button>
+            </div>
+            <div class="col-12 col-md-auto">
+                <button onclick="updateBook()" class=" btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1" data-loading-text="Loading...">
+                    <i class="bx bx-save text-4 me-2"></i> Update Book
+                </button>
+            </div>
+            <div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
+                <a href="/admin/book" class=" btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Cancel</a>
+            </div>
+            <div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0 ms-auto">
+                <a onclick="deleteBook()" href="#" class="btn btn-danger btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">
+                    <i class="bx bx-trash text-4 me-2"></i> Delete Book
+                </a>
+            </div>
+        </div>
+    </form>
+<!-- end: page -->

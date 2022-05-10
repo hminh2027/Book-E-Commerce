@@ -152,6 +152,81 @@ const insertOrder = () => {
     })
 }
 
+const getBooks = () => {
+    const min = $('.input-min').val()
+    const max = $('.input-max').val()
+
+    window.location.href = `http://localhost:8000/book?minPrice=${min}&maxPrice=${max}`
+}
+
+const insertBook = () => {
+    const selectedFile = document.querySelector('#img').files[0]       
+
+    const reader = new FileReader()
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+
+        const data = {
+            categoryId: $('#category').find(":selected").val(),
+            title: $('#title').val(),
+            longDescription: $('#long-desc').val(),
+            shortDescription: $('#short-desc').val(),
+            skucode: $('#sku').val(),
+            quantity: $('#qty').val(),
+            priceIn: $('#price-in').val(),
+            priceOut: $('#price-out').val(),
+            sale: $('#sale').val(),
+            image: reader.result,
+        }
+
+        $.ajax({
+            type: "POST",
+            url: `http://localhost:8000/admin/book/create`,
+            async: false,
+            data,
+            success: (res) => {
+                console.log(res)
+            },
+            error: (err) => {
+                return alert(err.responseJSON.msg)
+            }
+        })
+    }
+    reader.onerror = () => {
+        console.error('File Reader Error')
+        setErrMsg('something went wrong!')
+    }      
+}
+
+const updateBook = () => {
+        const id = $('#book-id').val()
+        const data = {
+            categoryId: $('#category').find(":selected").val(),
+            title: $('#title').val(),
+            longDescription: $('#long-desc').val(),
+            shortDescription: $('#short-desc').val(),
+            skucode: $('#sku').val(),
+            quantity: $('#qty').val(),
+            priceIn: $('#price-in').val(),
+            priceOut: $('#price-out').val(),
+            sale: $('#sale').val()
+        }
+
+        $.ajax({
+            type: "PUT",
+            url: `http://localhost:8000/admin/book/${id}`,
+            async: false,
+            data,
+            success: (res) => {
+                window.location.href = "/admin/book"
+            },
+            error: (err) => {
+                return alert(err.responseJSON.msg)
+            }
+        })
+    
+}
+
 const set_cookie = (name, value) => {
     document.cookie = name +'='+ value +'; Path=/;';
 }

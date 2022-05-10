@@ -1,8 +1,12 @@
 const Book = require("../models/book.model")
 const Category = require("../models/category.model")
 
+const {cloudinary} = require('../utils/cloudinary')
+
 module.exports.getAllBooks = async (req, res) => {
     let rs2
+    const minPrice = req.query.minPrice || 0
+    const maxPrice = req.query.maxPrice || 999999
     const { categoryID } = req.query
 
    categoryID ? rs2 = await Book.getByCategoryId(categoryID) : rs2 = await Book.getAll()
@@ -10,11 +14,14 @@ module.exports.getAllBooks = async (req, res) => {
     const rs1 = await Category.getAll()
     const rs3 = await Book.getFeaturedBooks()
 
+    // Filter by price range
+    let books = rs2.data.filter(book => book.price > minPrice && book.price < maxPrice)
+
     // Pagination
     const page = req.query.page || 1
     const limit = 8
     const pageCount = Math.ceil(rs2.data.length / limit)
-    const books = rs2.data.slice(page * limit - limit, page * limit)
+    books = books.slice(page * limit - limit, page * limit)
 
     return res.render('shop', {
         categories: rs1.data,
@@ -36,7 +43,27 @@ module.exports.getBookById = async (req, res) => {
     })
 }
 
-module.exports.createBook = async (req, res) => {
+module.exports.insertBook = async (req, res) => {
+    const { categoryId, title, image, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription } = req.body
 
-    return res.status(200).send('c')
+    const uploadRs = await cloudinary.uploader.upload(image, {
+        upload_preset: 'books'
+    })
+
+    const rs = await Book.insertBook(categoryId, title, uploadRs.url, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
+}
+
+module.exports.updateBook = async (req, res) => {
+    const {id} = req.params
+    const { categoryId, title, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription } = req.body
+
+    const rs = await Book.updateBook(id, categoryId, title, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
 }

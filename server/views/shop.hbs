@@ -83,16 +83,25 @@
 					<div class="shop-tab">
 						<div class="tab-3">
 							<ul class="nav">
-								<li><a class="active" href="#th" data-toggle="tab"><i
-											class="fa fa-th-large"></i>Grid</a></li>
+								<li><a class="active" href="#th" data-toggle="tab"><i class="fa fa-th-large"></i>Grid</a></li>
 								<li><a href="#list" data-toggle="tab"><i class="fa fa-bars"></i>List</a></li>
 							</ul>
 						</div>
-						<div class="list-page">
-							<p>Items 1-9 of 11</p>
-						</div>
 					</div>
-
+					<div class="toolbar-sorter" style="width: 40%; display: flex;">
+						<div class="price-input">
+							<div class="field">
+								<span>Min</span>
+								<input type="number" name="min-price" class="input-min" value="0" min="0" max="500000">
+							</div>
+							<div class="separator">-</div>
+							<div class="field">
+								<span>Max</span>
+								<input type="number" name="max-price" class="input-max" value="500000" min="0" max="500000">
+							</div>
+						</div>
+						<button onclick="getBooks()" class="btn" style="padding: 0 10px; margin: 0 10px;">Filter</button>
+					</div>
 					<div class="toolbar-sorter">
 						<span>Sort By</span>
 						<select id="sorter" class="sorter-options" data-role="sorter">
