@@ -13,7 +13,7 @@ join BOOK_IMAGES d on d.book_id = a.id
 where a.is_deleted = 0
 group by a.id, b.id, b.name, title, price_out, sale, quantity, sku_code, short_description , long_description, published_at, image
 go
-select * from V_BOOKS
+select * from V_BOOKS where title like '%me%'
 ---
 go
 create or alter view V_CATEGORIES as
@@ -23,6 +23,50 @@ where a.is_deleted = 0 and b.is_deleted = 0
 group by a.id, a.name
 go
 select * from V_CATEGORIES
+---
+go
+create or alter view V_TAGS as
+select * from TAGS
+where is_deleted = 0
+go
+select * from V_TAGS
+---
+go
+create or alter view V_TAG_BLOGS as
+select tag_id, a.blog_id, b.id, c.username, title, b.body, thumbnail, count(b.id) as comments, day(a.created_at) as day, datename(m, a.created_at) as month, convert(varchar, a.created_at, 100) as date 
+from BLOG_TAGS a
+join BLOGS b on b.id = a.blog_id
+join USERS c on c.id = b.user_id
+join COMMENTS d on d.blog_id = b.id
+group by tag_id, b.id, c.username, title, b.body, thumbnail, a.created_at, a.blog_id
+go
+select * from V_TAG_BLOGS
+---
+go
+create or alter view V_BLOG_TAGS as
+select b.tag_name, blog_id from BLOG_TAGS a
+join TAGS b on b.id = a.tag_id
+go
+select * from V_BLOG_TAGS
+---
+go
+create or alter view V_COMMENTS as
+select blog_id, username, body, convert(varchar, a.modified_at, 100) as date from COMMENTS a
+join USERS b on b.id = a.user_id
+where a.is_deleted = 0
+go
+select * from V_COMMENTS
+---
+go
+create or alter view V_BLOGS as
+select a.id, b.username, title, a.body, thumbnail, count(b.id) as comments, day(a.created_at) as day, datename(m, a.created_at) as month, convert(varchar, a.created_at, 100) as date 
+from BLOGS a
+left join USERS b on b.id = a.user_id
+left join COMMENTS c on c.blog_id = a.id
+where a.is_deleted = 0
+group by a.id, b.username, title, a.body, thumbnail, a.created_at
+go
+select * from V_BLOGS
 ---
 go
 create or alter view V_FEATURED_BOOKS as
@@ -124,6 +168,15 @@ go
 select * from V_ADDRESSES
 ---
 go
+create or alter view V_USERS as
+select a.id, b.name as country, c.name as role, first_name, last_name, company_name, username, phone, email, convert(varchar, created_at, 100) as join_date, is_active 
+from USERS a
+join COUNTRIES b on b.id = a.country_id
+join ROLES c on c.id = a.role_id
+go
+select * from V_USERS
+---
+go
 create or alter view V_COUPONS as
 select id, code, value from COUPONS
 where is_deleted = 0
@@ -177,19 +230,19 @@ begin
 	 where username = @username and password = @password and role_id = 2 and is_active = 1 
 end
 go
-exec SP_USERLOGIN @username = 'thang1', @password = '123'
+exec SP_USERLOGIN @username = 'thang1', @password = '202cb962ac59075b964b07152d234b70'
 ---
 go
 create or alter proc SP_ADMINLOGIN @username nvarchar(255), @password nvarchar(255) as
 begin
 	begin tran
 		begin try
-			select a.id, b.id as country_id, d.id as cart_id, c.name as role, first_name, last_name, company_name, username, phone, email, state, city, address, postcode
-			 from USERS a
+			select a.id, b.id as country_id, d.id as cart_id, c.name as role, first_name, last_name, company_name, username, phone, email state, city, address, postcode
+			from USERS a
 			join COUNTRIES b on b.id = a.country_id
 			join ROLES c on c.id = a.role_id
-			join CARTS d on d.user_id = a.id
-			join USER_ADDRESS e on e.user_id = a.id
+			left join CARTS d on d.user_id = a.id
+			left join USER_ADDRESS e on e.user_id = a.id
 			 where username = @username and password = @password and role_id = 1 and is_active = 1 
 			commit transaction
 		end try
@@ -198,7 +251,7 @@ begin
 		end catch
 end
 go
-exec SP_ADMINLOGIN @username = 'admin', @password = '123'
+exec SP_ADMINLOGIN @username = 'admin', @password = '202cb962ac59075b964b07152d234b70'
 ---
 go
 create or alter proc SP_SIGNUP 

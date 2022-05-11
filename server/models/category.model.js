@@ -1,5 +1,4 @@
-const { getViewQuery, connect  } = require("../utils/database")
-const sql = require('mssql')
+const { getViewQuery  } = require("../utils/database")
 
 class Category {
     static getAll= async () => {

@@ -40,6 +40,7 @@ module.exports.postLogin = async (req, res) => {
     })
 }
 
+// GET
 module.exports.getBooks = async (req, res) => {
     let rs2
     const minPrice = req.query.minPrice || 0
@@ -80,6 +81,34 @@ module.exports.getOrders = async (req, res) => {
         layout: 'admin',
         orders,
         pageCount
+    })
+}
+
+module.exports.getUsers = async (req, res) => {
+    const rs = await User.getAll()
+
+    // Pagination
+    const page = req.query.page || 1
+    const limit = 8
+    const pageCount = Math.ceil(rs.data.length / limit)
+    users = rs.data.slice(page * limit - limit, page * limit)
+
+    return res.render('admin/user', {
+        layout: 'admin',
+        users,
+        pageCount
+    })
+}
+
+module.exports.getUsersById = async (req, res) => {
+    const {id} = req.params
+    const rs = await User.getById(id)
+    const rs2 = await User.getUserAddress(id)
+
+    return res.render('admin/user-detail', {
+        layout: 'admin',
+        user: rs.data,
+        address: rs2.data
     })
 }
 

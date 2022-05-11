@@ -1,58 +1,14 @@
 const { getViewQuery, connect  } = require("../utils/database")
 const sql = require('mssql')
 
-class Book {
+class Blog {
 
     static getAll = async () => {
         try {
-            const result = await getViewQuery('V_BOOKS')
+            const result = await getViewQuery('V_BLOGS')
             return {status: 200, data: result[0]}
 
         } catch (e) {
-            console.log(err)
-            return {status: 500, data: err}
-        }
-    }
-
-    static getFeaturedBooks = async () => {
-        try {
-            const result = await getViewQuery('V_FEATURED_BOOKS')
-            return {status: 200, data: result[0]}
-
-        } catch (err) {
-            console.log(err)
-            return {status: 500, data: err}
-        }
-    }
-
-    static getOnSaleBooks = async () => {
-        try {
-            const result = await getViewQuery('V_ONSALE_BOOKS')
-            return {status: 200, data: result[0]}
-
-        } catch (err) {
-            console.log(err)
-            return {status: 500, data: err}
-        }
-    }
-
-    static getTopSellerBooks = async () => {
-        try {
-            const result = await getViewQuery('V_BESTSELLER_BOOKS')
-            return {status: 200, data: result[0]}
-
-        } catch (err) {
-            console.log(err)
-            return {status: 500, data: err}
-        }
-    }
-
-    static getNewBooks = async () => {
-        try {
-            const result = await getViewQuery('V_NEW_BOOKS')
-            return {status: 200, data: result[0]}
-
-        } catch (err) {
             console.log(err)
             return {status: 500, data: err}
         }
@@ -63,7 +19,7 @@ class Book {
             const pool = await connect()
             const result = await pool.request()
             .input('id', sql.Int, id)
-            .query('select * from V_BOOKS where id = @id')
+            .query('select * from V_BLOGS where id = @id')
             
             return {status: 200, data: result.recordset[0]}
 
@@ -74,12 +30,12 @@ class Book {
         
     }
 
-    static getByCategoryId = async (id) => {
+    static getByTagId = async (id) => {
         try {
             const pool = await connect()
             const result = await pool.request()
             .input('id', sql.Int, id)
-            .query('select * from V_BOOKS where category_id = @id')
+            .query('select * from V_TAG_BLOGS where tag_id = @id')
             
             return {status: 200, data: result.recordset}
 
@@ -94,7 +50,7 @@ class Book {
             const pool = await connect()
             const result = await pool.request()
             .input('title', sql.NVarChar, '%' + title + '%')
-            .query('select * from V_BOOKS where title like @title')
+            .query('select * from V_BLOGS where title like @title')
             
             return {status: 200, data: result.recordset}
 
@@ -105,7 +61,7 @@ class Book {
     }
 
     // INSERT
-    static insertBook = async (categoryId, title, image, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription) => {
+    static insertBlog = async (categoryId, title, image, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription) => {
         try {
             const pool = await connect()
             const result = await pool.request()
@@ -119,7 +75,7 @@ class Book {
             .input('skucode', sql.NVarChar, skucode)
             .input('short_desc', sql.NVarChar, shortDescription)
             .input('long_desc', sql.NVarChar, longDescription)
-            .execute('SP_INSERT_BOOK')
+            .execute('SP_INSERT_BLOG')
 
             if(result.rowsAffected[0] === 0) return {status: 500, data: 'Inserted Fail!'}
             return {status: 200, data: 'Inserted Successful!'}
@@ -130,7 +86,7 @@ class Book {
         }
     }
 
-    static updateBook = async (id, categoryId, title, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription) => {
+    static updateBlog = async (id, categoryId, title, quantity, priceIn, priceOut, sale, skucode, shortDescription, longDescription) => {
         try {
             const pool = await connect()
             const result = await pool.request()
@@ -144,7 +100,7 @@ class Book {
             .input('skucode', sql.NVarChar, skucode)
             .input('short_desc', sql.NVarChar, shortDescription)
             .input('long_desc', sql.NVarChar, longDescription)
-            .execute('SP_UPDATE_BOOK')
+            .execute('SP_UPDATE_BLOG')
 
             if(result.rowsAffected[0] === 0) return {status: 500, data: 'Updated Fail!'}
             return {status: 200, data: 'Updated Successful!'}
@@ -156,4 +112,4 @@ class Book {
     }
 }
 
-module.exports = Book
+module.exports = Blog

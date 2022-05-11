@@ -7,9 +7,11 @@ module.exports.getAllBooks = async (req, res) => {
     let rs2
     const minPrice = req.query.minPrice || 0
     const maxPrice = req.query.maxPrice || 999999
-    const { categoryID } = req.query
+    const { categoryID, search } = req.query
 
-   categoryID ? rs2 = await Book.getByCategoryId(categoryID) : rs2 = await Book.getAll()
+   if (categoryID) rs2 = await Book.getByCategoryId(categoryID)  
+   else if (search) rs2 = await Book.getByTitle(search)  
+   else rs2 = await Book.getAll()
 
     const rs1 = await Category.getAll()
     const rs3 = await Book.getFeaturedBooks()

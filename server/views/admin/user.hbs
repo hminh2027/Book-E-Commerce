@@ -1,0 +1,114 @@
+<header class="page-header page-header-left-inline-breadcrumb">
+    <h2 class="font-weight-bold text-6">Customers</h2>
+    <div class="right-wrapper">
+        <ol class="breadcrumbs">
+            <li><span>Home</span></li>
+            <li><span>User</span></li>
+        </ol>
+    </div>
+</header>
+
+<!-- start: page -->
+<div class="row">
+    <div class="col">
+
+        <div class="card card-modern">
+            <div class="card-body">
+                <div class="datatables-header-footer-wrapper">
+                    <div class="datatable-header">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
+                                <div class="d-flex align-items-lg-center flex-column flex-lg-row">
+                                    <label class="ws-nowrap me-3 mb-0">Filter By:</label>
+                                    <select class="form-control select-style-1 filter-by" name="filter-by">
+                                        <option value="all" selected>All</option>
+                                        <option value="1">ID</option>
+                                        <option value="2">Name</option>
+                                        <option value="3">Phone</option>
+                                        <option value="4">E-mail</option>
+                                        <option value="5">Orders</option>
+                                        <option value="6">Total Amount</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-auto ps-lg-1">
+                                <div class="search search-style-1 search-style-1-lg mx-lg-auto">
+                                    <div class="input-group">
+                                        <input type="text" class="search-term form-control" name="search-term" id="search-term" placeholder="Search Customer">
+                                        <button class="btn btn-default" type="submit"><i class="bx bx-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list" style="min-width: 750px;">
+
+                        <thead>
+                            <tr>
+                                <th width="3%"><input type="checkbox" name="select-all" class="select-all checkbox-style-1 p-relative top-2" value="" /></th>
+                                <th width="8%">ID</th>
+                                <th width="8%">Name</th>
+                                <th width="8%">Phone</th>
+                                <th width="15%">E-mail</th>
+                                <th width="8%">Role</th>
+                                <th width="10%">Join At</th>
+                                <th width="10%">Is Active</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each users}}
+                            <tr>
+                                <td width="30"><input type="checkbox" name="checkboxRow{{this.id}}" class="checkbox-style-1 p-relative top-2" value="" /></td>
+                                <td><a href="/admin/user/{{this.id}}"><strong>{{this.id}}</strong></a></td>
+                                <td><a href="/admin/user/{{this.id}}"><strong>{{this.username}}</strong></a></td>
+                                <td>{{this.phone}}</td>
+                                <td>{{this.email}}</td>
+                                <td>{{this.role}}</td>
+                                <td>{{this.join_date}}</td>
+                                <td>{{this.is_active}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <hr class="solid mt-5 opacity-4">
+                    <div class="datatable-footer">
+                        <div class="row align-items-center justify-content-between mt-3">
+                            <div class="col-md-auto order-1 mb-3 mb-lg-0">
+                                <div class="d-flex align-items-stretch">
+                                    <div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+                                        <a href="#" class="btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3   ">Active</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-auto order-2 order-lg-3 mb-3 mb-lg-0">
+                                <div class="pagination-wrapper">
+                                     <nav aria-label="Page navigation example">
+                                        <ul class="pagination pagination-modern pagination-modern-spacing justify-content-center justify-content-lg-start mb-0">
+                                            <li class="page-item">
+                                                <a class="page-link prev" href="#" aria-label="Previous">
+                                                    <span><i class="fas fa-chevron-left" aria-label="Previous"></i></span>
+                                                </a>
+                                            </li>
+                                            {{#times pageCount}}
+                                            <li class="page-item "><a class="page-link" href="/admin/user?page={{this}}">{{this}}</a></li>
+                                            {{/times}}
+                                            <li class="page-item">
+                                                <a class="page-link next" href="#" aria-label="Next">
+                                                    <span><i class="fas fa-chevron-right" aria-label="Next"></i></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end: page -->

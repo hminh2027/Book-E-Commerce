@@ -16,6 +16,9 @@ router.get('/book/create', auth, adminController.getBookCreate)
 // Orders
 router.get('/order', auth, adminController.getOrders)
 router.get('/order/:id', auth, adminController.getOrderById)
+// Users
+router.get('/user', auth, adminController.getUsers)
+router.get('/user/:id', auth, adminController.getUsersById)
 
 router.put('/book/:id', auth, bookController.updateBook)
 

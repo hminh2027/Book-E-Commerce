@@ -6,6 +6,7 @@ const homeRoute = require('./home.route')
 const adminRoute = require('./admin.route')
 const couponRoute = require('./coupon.route')
 const orderRoute = require('./order.route')
+const blogRoute = require('./blog.route')
 
 module.exports = (app) => {
     app.use('/book', bookRoute)
@@ -15,5 +16,6 @@ module.exports = (app) => {
     app.use('/admin', adminRoute)
     app.use('/coupon', couponRoute)
     app.use('/order', orderRoute)
+    app.use('/blog', blogRoute)
     app.use('/', homeRoute)
 }
