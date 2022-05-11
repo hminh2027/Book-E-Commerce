@@ -43,6 +43,50 @@ class Order {
         }
     }
 
+    static getTodayOrdersCount = async () => {
+        try {
+            const result = await getViewQuery('V_TODAY_ORDERS')
+            return {status: 200, data: result[0][0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static getMonthlyRevenue = async () => {
+        try {
+            const result = await getViewQuery('V_MONTHLY_REVENUE')
+            return {status: 200, data: result[0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static getTotalProfit = async () => {
+        try {
+            const result = await getViewQuery('V_TOTAL_PROFIT')
+            return {status: 200, data: result[0][0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
+    static getTopCustomer = async () => {
+        try {
+            const result = await getViewQuery('V_TOP_CUSTOMER')
+            return {status: 200, data: result[0][0]}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
+
     static getByUserId = async (id) => {
         try {
             const pool = await connect()
@@ -58,12 +102,11 @@ class Order {
         }
     }
 
-    static insertOrder = async (shippingId, countryId, couponId, userId, note) => {
+    static insertOrder = async (shippingId, couponId, userId, note) => {
         try {
             const pool = await connect()
             const result = await pool.request()
             .input('shipping_id', sql.Int, shippingId)
-            .input('country_id', sql.Int, countryId)
             .input('coupon_id', sql.Int, couponId)
             .input('user_id', sql.Int, userId)
             .input('note', sql.NVarChar, note)

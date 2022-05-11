@@ -106,3 +106,13 @@ module.exports.postSignup = async (req, res) => {
     })
 
 }
+
+module.exports.deleteUser = async (req, res) => {
+    const {id} = req.params
+
+    const rs = await User.deleteUser(id)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
+}

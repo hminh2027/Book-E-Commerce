@@ -18,11 +18,11 @@ module.exports.getOrderDetail = async (req, res) => {
 
 module.exports.insertOrder = async (req, res) => {
     const userId = req.user.id
-    const { shippingId, countryId, coupon, note } = req.body
+    const { shippingId, coupon, note } = req.body
 
     const rs1 = await Coupon.getByCode(coupon)
 
-    const rs = await Order.insertOrder(shippingId, countryId, rs1.id, userId, note)
+    const rs = await Order.insertOrder(shippingId, rs1.id, userId, note)
 
     if (rs.status === 500) return res.status(500).json({ msg: rs.data })
 

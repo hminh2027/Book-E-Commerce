@@ -37,7 +37,7 @@ class User {
             const result = await pool.request()
             .input('username', sql.NVarChar, username)
             .input('password', sql.NVarChar, md5(password))
-            .execute('SP_ADMINLOGIN')
+            .execute('SP_ADMIN_LOGIN')
 
             if(!result.recordset[0]) return {status: 500, data: 'Wrong username/password'}
     
@@ -177,6 +177,21 @@ class User {
             .input('username', sql.NVarChar, username)
             .input('password', sql.NVarChar, md5(password))
             .execute('SP_SIGNUP')
+    
+            return {status: 200, data: result}
+
+        } catch (err) {
+            
+            return {status: 500, data: err}
+        }
+    }
+
+    static deleteUser = async (id) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .execute('SP_DELETE_USER')
     
             return {status: 200, data: result}
 

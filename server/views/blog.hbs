@@ -95,6 +95,8 @@
 </div>
 <!-- blog-main-area-end -->
 <script>
-    const body = $('.blog-body').text()
-    $('.blog-body').text(body.slice(0, 100))
+    $('.single-post').map((idx, e) => {
+        const body = $(e).find('.post-body').text()
+        $(e).find('.post-body').text(body.slice(0, 100))
+    })
 </script>

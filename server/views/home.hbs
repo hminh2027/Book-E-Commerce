@@ -356,7 +356,7 @@
                 <div class="col-lg-12">
                     <div class="single-post">
                         <div class="post-img">
-                            <a href="/blog/{{this.id}}"><img src="/img/post/1.jpg" alt="post" /></a>
+                            <a href="/blog/{{this.id}}"><img src="{{this.thumbnail}}" alt="post" /></a>
                             <div class="blog-date-time">
                                 <span class="day-time">{{this.day}}</span>
                                 <span class="moth-time">{{this.month}}</span>
@@ -469,6 +469,8 @@
 </div>
 <!-- social-group-area-end -->
 <script>
-    const body = $('.post-body').text()
-    $('.post-body').text(body.slice(0, 100))
+    $('.single-post').map((idx, e) => {
+        const body = $(e).find('.post-body').text()
+        $(e).find('.post-body').text(body.slice(0, 100))
+    })
 </script>

@@ -1,0 +1,194 @@
+<div class="row">
+    <div class="col-lg-6 mb-3">
+        <section class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <figure class="highcharts-figure">
+                            <div id="container"></div>
+                            <p class="highcharts-description">
+                                A basic column chart compares rainfall values between four cities.
+                                Tokyo has the overall highest amount of rainfall, followed by New York.
+                                The chart is making use of the axis crosshair feature, to highlight
+                                months as they are hovered over.
+                            </p>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {{!--  --}}
+    <div class="col-lg-6">
+        <div class="row mb-3">
+            <div class="col-xl-6">
+                <section class="card card-featured-left card-featured-secondary mb-3">
+                    <div class="card-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-secondary">
+                                    <i class="fas fa-life-ring"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Top Customer</h4>
+                                    <div class="info">
+                                        <strong class="amount">{{topCustomer.username}} ({{topCustomer.amount}} đ)</strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase" href="#">(view all)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xl-6">
+                <section class="card card-featured-left card-featured-secondary">
+                    <div class="card-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-secondary">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Total Profit</h4>
+                                    <div class="info">
+                                        <strong class="amount">{{totalProfit.total}} đ</strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase" href="#">(withdraw)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <section class="card card-featured-left card-featured-secondary mb-3">
+                    <div class="card-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-secondary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Today's Orders</h4>
+                                    <div class="info">
+                                        <strong class="amount">
+                                            {{#if ordersCount.count}}
+                                            {{ordersCount.count}}
+                                            {{else}}
+                                            0
+                                            {{/if}}
+                                            </strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase" href="#">(statement)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xl-6">
+                <section class="card card-featured-left card-featured-secondary">
+                    <div class="card-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-secondary">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary">
+                                    <h4 class="title">Top Seller</h4>
+                                    <div class="info">
+                                        <strong class="amount">{{topSeller.title}} ({{topSeller.quantity}} qty)</strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase" href="#">(report)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    const revenue = {{{revenue}}}
+    const data = [0,0,0,0,0,0,0,0,0,0,0,0]
+
+    revenue.map(e => data[e.month-1] += e.total)
+    
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Gross Monthly Revenue'
+        },
+        subtitle: {
+            text: 'In 2022'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Revenue (vnd)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} vnd</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Revenue',
+            data: data
+
+        }]
+    })
+</script>

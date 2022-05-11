@@ -20,9 +20,6 @@ router.get('/order/:id', auth, adminController.getOrderById)
 router.get('/user', auth, adminController.getUsers)
 router.get('/user/:id', auth, adminController.getUsersById)
 
-router.put('/book/:id', auth, bookController.updateBook)
-
 router.post('/login', adminController.postLogin)
-router.post('/book/create', auth, bookController.insertBook)
 
 module.exports = router

@@ -69,3 +69,13 @@ module.exports.updateBook = async (req, res) => {
 
     return res.status(200).json({ msg: rs.data })
 }
+
+module.exports.deleteBook = async (req, res) => {
+    const {id} = req.params
+
+    const rs = await Book.deleteBook(id)
+
+    if (rs.status === 500) return res.status(500).json({ msg: rs.data })
+
+    return res.status(200).json({ msg: rs.data })
+}

@@ -12,7 +12,7 @@ insert into ROLES values ('admin')
 insert into ROLES values ('customer')
 
 -- INSERT USERS --
-insert into USERS values (1, 1, N'Vũ Hoàng', N'Minh', null, 'admin', '202cb962ac59075b964b07152d234b70', '0965766511', 'vhminh2027@gmail.com', getdate(), getdate(), 1)
+insert into USERS values (1, 1, N'Vũ Hoàng', N'Minh', 'TNHH HM', 'admin', '202cb962ac59075b964b07152d234b70', '0965766511', 'vhminh2027@gmail.com', getdate(), getdate(), 1)
 insert into USERS values (2, 2, N'Vũ Đinh Trọng', N'Thắng', null, 'thang1', '202cb962ac59075b964b07152d234b70', '0832412321', 'thangngot@gmail.com', getdate(), getdate(), 1)
 insert into USERS values (4, 2, N'Matthew ', N'Healy', null, 'the1975', '202cb962ac59075b964b07152d234b70', '0123455675', 'the1975@gmail.com', getdate(), getdate(), 1)
 
@@ -74,8 +74,8 @@ insert into BOOKS values (3, 'The Great Gatsby', 16000, 33000, 3, 3, 'BK5', 'Gre
 insert into BOOKS values (4, 'War and Peace', 11000, 37000, 40, 53, 'BK6', 'Set during the Great Depression, the novel focuses on a poor family of sharecroppers, the Joads, driven from their home by drought, economic hardship, and changes in the agriculture industry', 'Set during the Great Depression, the novel focuses on a poor family of sharecroppers, the Joads, driven from their home by drought, economic hardship, and changes in the agriculture industry', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (5, 'Hamlet', 14000, 60000, 10, 43, 'BK7', 'One Thousand and One Nights is a collection of Middle Eastern and South Asian stories and folk tales compiled in Arabic during the Islamic Golden Age. It is often known in English as the Arabian', 'One Thousand and One Nights is a collection of Middle Eastern and South Asian stories and folk tales compiled in Arabic during the Islamic Golden Age. It is often known in English as the Arabian', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (6, 'Lolita', 13000, 46000, 20, 5, 'BK8', 'A landmark novel of high modernism, the text, centering on the Ramsay family and their visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', 'A landmark novel of high modernism, the text, centering on the Ramsay family and their visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', getdate(), getdate(), getdate(), 0)
-insert into BOOKS values (4, 'Kafka on the Shore', 13000, 55000, 12, 24, 'BK9', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', getdate(), getdate(), getdate(), 0)
-insert into BOOKS values (1, 'The Adventures of Huckleberry Finn', 20000, 45000, 60, 31, 'BK10', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', getdate(), getdate(), getdate(), 0)
+insert into BOOKS values (4, 'Kafka on the Shore', 13000, 55000, 12, 24, 'BK9', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog ', getdate(), getdate(), getdate(), 0)
+insert into BOOKS values (1, 'The Adventures of Huckleberry Finn', 20000, 45000, 60, 31, 'BK10', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (1, 'The Spartacus', 12000, 45000, 10, 0, 'BK11', 'Swanns Way, the first part of A la recherche de temps perdu, Marcel Prousts seven-part cycle, was published in 1913', 'In it, Proust introduces the themes that run through the entire work. The narrator recalls his childhood, aided by the famous madeleine; and describes M. Swanns passion for Odette. The work is incomparable. Edmund Wilson said Proust has supplied for the first time in literature an equivalent in the full scale for the new theory of modern physics', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (2, 'Salmon!', 15000, 36000, 0, 0, 'BK12',  'Catch-22 is a satirical, historical novel by the American author Joseph Heller, first published in 1961. The novel, set during the later stages of World War II from 1943 onwards, is frequently cite', 'Catch-22 is a satirical, historical novel by the American author Joseph Heller, first published in 1961. The novel, set during the later stages of World War II from 1943 onwards, is frequently cite', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (1, 'The Pragmatic Programmer', 22000, 41000, 5, 0, 'BK13',  'The story details an incident when Marlow, an Englishman, took a foreign assignment from a Belgian trading company as a ferry-boat captain in Africa. Although Conrad does not specify the name', 'The story details an incident when Marlow, an Englishman, took a foreign assignment from a Belgian trading company as a ferry-boat captain in Africa. Although Conrad does not specify the name', getdate(), getdate(), getdate(), 0)
@@ -84,8 +84,8 @@ insert into BOOKS values (3, 'Dynamic Duo', 16000, 33000, 3, 3, 'BK15', 'Great E
 insert into BOOKS values (6, 'Let me follow', 11000, 37000, 0, 53, 'BK16', 'Set during the Great Depression, the novel focuses on a poor family of sharecroppers, the Joads, driven from their home by drought, economic hardship, and changes in the agriculture industry', 'Set during the Great Depression, the novel focuses on a poor family of sharecroppers, the Joads, driven from their home by drought, economic hardship, and changes in the agriculture industry', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (5, 'There Is No One At All', 14000, 60000, 0, 43, 'BK17', 'One Thousand and One Nights is a collection of Middle Eastern and South Asian stories and folk tales compiled in Arabic during the Islamic Golden Age. It is often known in English as the Arabian', 'One Thousand and One Nights is a collection of Middle Eastern and South Asian stories and folk tales compiled in Arabic during the Islamic Golden Age. It is often known in English as the Arabian', getdate(), getdate(), getdate(), 0)
 insert into BOOKS values (6, 'The Lord of The Ring', 13000, 46000, 20, 5, 'BK18', 'A landmark novel of high modernism, the text, centering on the Ramsay family and their visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', 'A landmark novel of high modernism, the text, centering on the Ramsay family and their visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', getdate(), getdate(), getdate(), 0)
-insert into BOOKS values (8, 'The Art Of Not Giving A F', 13000, 55000, 0, 24, 'BK19', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', getdate(), getdate(), getdate(), 0)
-insert into BOOKS values (7, 'Say Goodbye', 20000, 45000, 60, 31, 'BK20', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', getdate(), getdate(), getdate(), 0)
+insert into BOOKS values (8, 'The Art Of Not Giving A F', 13000, 55000, 0, 24, 'BK19', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole', 'In 1862 Charles Lutwidge Dodgson, a shy Oxford mathematician with a stammer, created a story about a little girl tumbling down a rabbit hole visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', getdate(), getdate(), getdate(), 0)
+insert into BOOKS values (7, 'Say Goodbye', 20000, 45000, 60, 31, 'BK20', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur', 'Revered by all of the towns children and dreaded by all of its mothers, Huckleberry Finn is indisputably the most appealing child-hero in American literatur visits to the Isle of Skye in Scotland between 1910 and 1920, skillfully manipulates temporality and psycholog', getdate(), getdate(), getdate(), 0)
 
 -- BOOK IMAGES --
 insert into BOOK_IMAGES values (1, 'https://res.cloudinary.com/minh2027/image/upload/v1651823507/Book%20E-Commerce/1_avulh7.jpg', getdate(), getdate(), 0)
@@ -113,7 +113,7 @@ insert into BOOK_IMAGES values (20, 'https://res.cloudinary.com/minh2027/image/u
 -- COMMENTS --
 insert into COMMENTS values (2, 2, 'What an advice!', getdate(), getdate(), 0)
 insert into COMMENTS values (2, 3, 'Can i have your number?', getdate(), getdate(), 0)
-insert into COMMENTS values (3, 1, 'Seriously...', getdate(), getdate(), 1)
+insert into COMMENTS values (3, 1, 'Seriously...', getdate(), getdate(), 0)
 insert into COMMENTS values (3, 2, 'Would love to read more!', getdate(), getdate(), 0)
 
 -- REVIEWS --
@@ -136,14 +136,22 @@ insert into BLOG_TAGS values (5, 5, getdate(), getdate(), 0)
 insert into BLOG_TAGS values (3, 5, getdate(), getdate(), 0)
 
 -- ORDERS --
-insert into ORDERS values (1, 2, 1,  2, 'Please becareful, fragile product!', getdate(), getdate(), getdate(), 0)
-insert into ORDERS values (2, null, 2, 2, null, getdate(), getdate(), getdate(), 0)
-insert into ORDERS values (2, null, 2, 3, null, getdate(), getdate(), getdate(), 0)
+insert into ORDERS values (1, 2, 1,  2, 'Please becareful, fragile product!', getdate(), '2022-03-06 15:30:14.947', getdate(), 0)
+insert into ORDERS values (2, null, 2, 2, null, getdate(), '2022-04-03 15:30:14.947', getdate(), 0)
+insert into ORDERS values (2, null, 2, 3, null, getdate(), '2022-07-12 15:30:14.947', getdate(), 0)
+insert into ORDERS values (3, null, 2, 3, 'Quickly, i have work to do', getdate(), '2022-01-12 15:30:14.947', getdate(), 0)
+insert into ORDERS values (3, null, 2, 3, 'Stay calm my friend', getdate(), '2022-08-12 15:30:14.947', getdate(), 0)
+insert into ORDERS values (2, null, 2, 3, null, getdate(), '2022-12-12 15:30:14.947', getdate(), 0)
 
 -- ORDER DETAILS --
 insert into ORDER_DETAILS values (2, 1, 1, 45000)
 insert into ORDER_DETAILS values (3, 1, 2, 72000)
 insert into ORDER_DETAILS values (4, 2, 1, 13000)
+insert into ORDER_DETAILS values (5, 3, 1, 23000)
+insert into ORDER_DETAILS values (2, 4, 1, 45000)
+insert into ORDER_DETAILS values (3, 4, 2, 72000)
+insert into ORDER_DETAILS values (4, 5, 1, 13000)
+insert into ORDER_DETAILS values (5, 6, 1, 23000)
 
 -- CARTS --
 insert into CARTS values (2, getdate(), getdate(), 0)

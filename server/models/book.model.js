@@ -154,6 +154,22 @@ class Book {
             return {status: 500, data: err}
         }
     }
+
+    static deleteBook = async (id) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('id', sql.Int, id)
+            .execute('SP_DELETE_BOOK')
+
+            if(result.rowsAffected[0] === 0) return {status: 500, data: 'Deleted Fail!'}
+            return {status: 200, data: 'Deleted Successful!'}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }
+    }
 }
 
 module.exports = Book

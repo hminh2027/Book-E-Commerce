@@ -127,7 +127,6 @@ const insertOrderDetail = (bookId, quantity, price) => {
 const insertOrder = () => {
     const data = {
         shippingId: $('.shipping:checked').val(),
-        countryId: $('#country').val(),
         coupon: $('#coupon').val(),
         note: $('#checkout-mess').val()
     }
@@ -181,7 +180,7 @@ const insertBook = () => {
 
         $.ajax({
             type: "POST",
-            url: `http://localhost:8000/admin/book/create`,
+            url: `http://localhost:8000/book/`,
             async: false,
             data,
             success: (res) => {
@@ -214,7 +213,7 @@ const updateBook = () => {
 
         $.ajax({
             type: "PUT",
-            url: `http://localhost:8000/admin/book/${id}`,
+            url: `http://localhost:8000/book/${id}`,
             async: false,
             data,
             success: (res) => {
@@ -225,6 +224,39 @@ const updateBook = () => {
             }
         })
     
+}
+
+const deleteBook = () => {
+    const id = $('#book-id').val()
+
+    $.ajax({
+        type: "DELETE",
+        url: `http://localhost:8000/book/${id}`,
+        async: false,
+        success: (res) => {
+            window.location.href = "/admin/book"
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const deleteUser = () => {
+    const id = $('#user-id').val()
+
+    $.ajax({
+        type: "DELETE",
+        url: `http://localhost:8000/account/${id}`,
+        async: false,
+        success: (res) => {
+            window.location.href = "/admin/user"
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+
 }
 
 const login = (path) => {

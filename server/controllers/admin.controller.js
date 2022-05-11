@@ -10,8 +10,20 @@ const Order = require("../models/order.model")
 require('dotenv').config()
 
 module.exports.getAdminPage = async (req, res) => {
-    
-    return res.render('admin/home', {layout: 'admin'})
+    const rs = await Order.getTodayOrdersCount()
+    const rs2 = await Order.getTotalProfit()
+    const rs3 = await Order.getTopCustomer()
+    const rs4 = await Book.getTopSellerBooks()
+    const rs5 = await Order.getMonthlyRevenue()
+
+    return res.render('admin/home', {
+        layout: 'admin',
+        ordersCount: rs.data,
+        totalProfit: rs2.data,
+        topCustomer: rs3.data,
+        topSeller: rs4.data[0],
+        revenue: JSON.stringify(rs5.data)
+    })
 }
 
 module.exports.getLogin = async (req, res) => {
