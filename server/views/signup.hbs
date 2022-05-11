@@ -125,7 +125,7 @@
                         </form>
                     </div>
                     <div class="single-register">
-                        <a onclick="submit()" >Register</a>
+                        <a onclick="signup()" >Register</a>
                     </div>
                     <a href="login">Already have an account? Login</a>
                 </div>
@@ -134,39 +134,3 @@
     </div>
 </div>
 <!-- user-login-area-end -->
-<script>
-    const submit = () => {
-        const username = $("#username").val().trim(),
-            password = $("#password").val().trim(),
-            cfpassword = $("#cfpassword").val().trim(),
-            firstName = $("#first_name").val().trim(), 
-            lastName = $("#first_name").val().trim(), 
-            email = $("#email").val().trim(), 
-            companyName = $("#company_name").val().trim(), 
-            country = $("#country").val().trim(),
-            phone = $("#phone").val().trim(), 
-            address = $("#address").val().trim(), 
-            city = $("#city").val().trim(), 
-            state = $("#state").val().trim(), 
-            postcode = $("#postcode").val().trim()
-
-        const formData = { username, password, cfpassword, firstName, lastName, email, companyName, country, phone, address, city, state, postcode }
-             
-            console.log(formData)
-        if (!username || !password || !cfpassword || !firstName || !lastName || !email || !country || !phone || !address || !city || !state || !postcode) return window.alert('Please fill all the required blank')
-        if (password !== cfpassword) return window.alert('Password not match!')
-
-        $.ajax({
-            type: "POST",
-            url: "/account/signup",
-            async: false,
-            data: formData,
-            success: (res) => {
-                console.log(res)
-		    },
-            error: (err) => {          
-                return alert(err.responseJSON.msg)
-            }
-        })
-    }
-</script>

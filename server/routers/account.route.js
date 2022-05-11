@@ -6,7 +6,7 @@ const auth = require('../middlewares/customerAuth')
 
 router.get('/', auth, accountController.getMyAccount)
 router.get('/login', accountController.getLogin)
-router.get('/signup', auth, accountController.getSignup)
+router.get('/signup', accountController.getSignup)
 
 router.put('/', auth, accountController.updateUser)
 router.put('/address', auth, accountController.updateUserAddress)

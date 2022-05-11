@@ -9,7 +9,7 @@ class User {
             const pool = await connect()
             const result = await pool.request()
             .input('username', sql.NVarChar, username)
-            .input('password', sql.NVarChar, password)
+            .input('password', sql.NVarChar, md5(password))
             .execute('SP_ADMINLOGIN')
 
             if(!result.recordset[0]) return {status: 500, data: 'Wrong username/password'}
@@ -56,6 +56,26 @@ class User {
 
             if(result.rowsAffected[0] === 0) return {status: 500, data: 'Updated Fail!'}
             return {status: 200, data: 'Updated Successful!'}
+
+        } catch (err) {
+            console.log(err)
+            return {status: 500, data: err}
+        }  
+    }
+
+    static insertUserAddress = async (userId, city, address, state, postcode) => {
+        try {
+            const pool = await connect()
+            const result = await pool.request()
+            .input('city', sql.NVarChar, city)
+            .input('address', sql.NVarChar, address)
+            .input('user_id', sql.Int, userId)
+            .input('state', sql.NVarChar, state)
+            .input('postcode', sql.NVarChar, postcode)
+            .execute('SP_INSERT_USER_ADDRESS')
+
+            if(result.rowsAffected[0] === 0) return {status: 500, data: 'Inserted Fail!'}
+            return {status: 200, data: 'Inserted Successful!'}
 
         } catch (err) {
             console.log(err)

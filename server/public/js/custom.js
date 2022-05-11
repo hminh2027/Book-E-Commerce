@@ -227,6 +227,66 @@ const updateBook = () => {
     
 }
 
+const login = (path) => {
+    const formData = {
+        username: $("#username").val(),
+        password: $("#password").val()
+    }
+
+    if (!username || !password) return window.alert('Please fill all the required blank')
+
+    $.ajax({
+        type: "POST",
+        url: `/${path}/login`,
+        async: false,
+        data: formData,
+        success: (res) => {
+            delete_cookie('token')
+            set_cookie('token', res.token)
+            window.location.href = `/${path}`
+        },
+        error: (err) => {
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
+const signup = () => {
+    const username = $("#username").val().trim(),
+        password = $("#password").val().trim(),
+        cfpassword = $("#cfpassword").val().trim(),
+        firstName = $("#first_name").val().trim(), 
+        lastName = $("#first_name").val().trim(), 
+        email = $("#email").val().trim(), 
+        companyName = $("#company_name").val().trim(), 
+        country = $("#country").val().trim(),
+        phone = $("#phone").val().trim(), 
+        address = $("#address").val().trim(), 
+        city = $("#city").val().trim(), 
+        state = $("#state").val().trim(), 
+        postcode = $("#postcode").val().trim()
+
+    const formData = { username, password, cfpassword, firstName, lastName, email, companyName, country, phone, address, city, state, postcode }
+         
+    if (!username || !password || !cfpassword || !firstName || !lastName || !email || !country || !phone || !address || !city || !state || !postcode) return window.alert('Please fill all the required blank')
+    if (password !== cfpassword) return window.alert('Password not match!')
+
+    $.ajax({
+        type: "POST",
+        url: "/account/signup",
+        async: false,
+        data: formData,
+        success: (res) => {
+            delete_cookie('token')
+            set_cookie('token', res.token)
+            // window.location.href = "/account"
+        },
+        error: (err) => {          
+            return alert(err.responseJSON.msg)
+        }
+    })
+}
+
 const set_cookie = (name, value) => {
     document.cookie = name +'='+ value +'; Path=/;';
 }
@@ -235,7 +295,7 @@ const delete_cookie = (name) => {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-const logout = () => {
+const logout = (path) => {
     delete_cookie('token')
-    window.location.href = '/account/login'    
+    window.location.href = `/${path}/login`    
 }

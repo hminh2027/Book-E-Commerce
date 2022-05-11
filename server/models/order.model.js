@@ -4,7 +4,7 @@ const sql = require('mssql')
 class Order {
     static getAll = async () => {
         try {
-            const result = await getViewQuery('V_BOOKS')
+            const result = await getViewQuery('V_ORDERS')
             return {status: 200, data: result[0]}
 
         } catch (err) {

@@ -9737,7 +9737,7 @@ html.dark .dropzone:hover .dz-default span {
         position: fixed;
         bottom: 0;
         right: 0;
-        width: calc(100% - 300px);
+        width: calc(100%);
         background: #f5f5f8;
         padding: 40px 25px;
         margin: 0;
@@ -17721,7 +17721,7 @@ p .alternative-font {
 a,
 a:hover,
 a:focus {
-    color: #ccc
+    color: black
 }
 
 p.drop-caps:first-letter {

@@ -8,9 +8,14 @@ const auth = require('../middlewares/adminAuth')
 
 router.get('/', auth, adminController.getAdminPage)
 router.get('/login', adminController.getLogin)
+
+// Books
 router.get('/book/', auth, adminController.getBooks)
 router.get('/book/:id', auth, adminController.getBookById)
 router.get('/book/create', auth, adminController.getBookCreate)
+// Orders
+router.get('/order', auth, adminController.getOrders)
+router.get('/order/:id', auth, adminController.getOrderById)
 
 router.put('/book/:id', auth, bookController.updateBook)
 

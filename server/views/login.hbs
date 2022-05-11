@@ -34,7 +34,7 @@
                         <input id="password" name="password" type="password" required />
                     </div>
                     <div class="single-login single-login-2">
-                        <a onclick="submit()"  href="#">login</a>
+                        <a onclick="login('account')"  href="#">login</a>
                     </div>
                     <a href="#">Lost your password?</a>
                     <br/>
@@ -45,28 +45,3 @@
     </div>
 </div>
 <!-- user-login-area-end -->
-<script>
-    function submit() {
-        const formData = {
-            username: $("#username").val(),
-            password: $("#password").val()
-        }
-
-        if (!username || !password) return window.alert('Please fill all the required blank')
-
-        $.ajax({
-            type: "POST",
-            url: "/account/login",
-            async: false,
-            data: formData,
-            success: (res) => {
-                delete_cookie('token')
-                set_cookie('token', res.token)
-                window.location.href = "/account"
-		    },
-            error: (err) => {
-                return alert(err.responseJSON.msg)
-            }
-        })
-    }
-</script>

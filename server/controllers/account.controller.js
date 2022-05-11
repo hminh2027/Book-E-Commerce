@@ -38,25 +38,6 @@ module.exports.getSignup = async (req, res) => {
     return res.render('signup', {countries: rs.data})
 }
 
-module.exports.postLogin = async (req, res) => {
-    const { username, password } = req.body
-
-    if (!username || !password) return res.status(400).json({msg:'Missing information!'})
-
-    const rs = await User.customerLogin(username, password)
-
-    if (rs.status === 500) return res.status(500).json({msg: rs.data})
-    
-    const accessToken = jwt.sign(rs.data, process.env.ACCESS_TOKEN_KEY, {
-        expiresIn: '30d'
-    })
-
-    return res.status(200).json({
-        msg: 'Success',
-        token: accessToken
-    })
-}
-
 module.exports.updateUser = async (req, res) => {
     const { username } = req.user
     const { firstName, lastName, email, country, companyName, phone, curPassword, newPassword } = req.body
@@ -85,6 +66,25 @@ module.exports.updateUserAddress = async (req, res) => {
     return res.status(200).json({ msg: rs.data })
 }
 
+module.exports.postLogin = async (req, res) => {
+    const { username, password } = req.body
+
+    if (!username || !password) return res.status(400).json({msg:'Missing information!'})
+
+    const rs = await User.customerLogin(username, password)
+
+    if (rs.status === 500) return res.status(500).json({msg: rs.data})
+    
+    const accessToken = jwt.sign(rs.data, process.env.ACCESS_TOKEN_KEY, {
+        expiresIn: '30d'
+    })
+
+    return res.status(200).json({
+        msg: 'Success',
+        token: accessToken
+    })
+}
+
 module.exports.postSignup = async (req, res) => {
     const { firstName, lastName, email, password, companyName, phone, address, city, state, postcode, username, country } = req.body
 
@@ -95,6 +95,14 @@ module.exports.postSignup = async (req, res) => {
     const rs = await User.signup(firstName, lastName, email, password, companyName, phone, address, city, state, postcode, username, country)
     
     if (rs.status === 500) return res.status(500).json({msg: rs.data.originalError.info.message})
-    
-    return res.status(200).render('my-account')
+
+    const accessToken = jwt.sign(rs.data, process.env.ACCESS_TOKEN_KEY, {
+        expiresIn: '30d'
+    })
+
+    return res.status(200).json({
+        msg: 'Success',
+        token: accessToken
+    })
+
 }
